@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 
 namespace Example.WebApi.Controllers
@@ -22,43 +23,30 @@ namespace Example.WebApi.Controllers
             new Pokemon(5, "Metapod", "Bug")
         };
 
-
-
         [HttpGet]
         // GET: api/Pokemon
-        public HttpResponseMessage Get([FromUri] string Name = null, [FromUri] string Type = null)
+        public HttpResponseMessage Get([FromUri] PokemonRead pokemon)
         {
             if (PokemonList == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound, "No pokemons found");
             }
-            else
-            {
-                List<Pokemon> filteredPokemon = new List<Pokemon>();
 
-                foreach ( var pokemon in PokemonList)
-                {
-                    if(Type != null && pokemon.Type == Type)
-                    {
-                        filteredPokemon.Add(pokemon);
-                    }
-                    if(Name != null && pokemon.Name == Name)
-                    {
-                        filteredPokemon.Add(pokemon);
-                    }
-                }
-                
-                 if (Name == null && Type == null)
-                {
-                    return Request.CreateResponse(HttpStatusCode.OK, PokemonList);
-                }
-                else
-                {
-                    return Request.CreateResponse(HttpStatusCode.OK, filteredPokemon);
-                    
-                }
+            IEnumerable<Pokemon> filteredPokemon = PokemonList;
+
+            filteredPokemon = filteredPokemon
+                .Where(p => pokemon.Type == null || p.Type == pokemon.Type)
+                .Where(p => pokemon.Name == null || p.Name == pokemon.Name);
+
+            if (filteredPokemon.Any())
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, filteredPokemon.ToList());
+            } else
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound, "No pokemons found with selected params");
             }
         }
+       
 
         [HttpGet]
         // GET: api/Pokemon/5
@@ -77,9 +65,10 @@ namespace Example.WebApi.Controllers
 
         [HttpPost]
         // POST: api/Pokemon
-        public HttpResponseMessage Post([FromBody] Pokemon newPokemon)
+        public HttpResponseMessage Post([FromBody] PokemonCreate newPokemon)
         {
-            PokemonList.Add(newPokemon);
+            Pokemon pokemonToAdd = new Pokemon(newPokemon.PokemonId, newPokemon.Name, newPokemon.Type);
+            PokemonList.Add(pokemonToAdd);
             Pokemon pokemonAdded = PokemonList.FirstOrDefault(p => p.PokemonId == newPokemon.PokemonId);
             if (pokemonAdded == null)
             {
@@ -94,7 +83,7 @@ namespace Example.WebApi.Controllers
 
         [HttpPut]
         // PUT: api/Pokemon/5
-        public HttpResponseMessage Put(int id, [FromBody] Pokemon updatedPokemon)
+        public HttpResponseMessage Put(int id, [FromBody] PokemonUpdate updatedPokemon)
         {
             Pokemon pokemonToUpdate = PokemonList.FirstOrDefault(p => p.PokemonId == id);
             pokemonToUpdate.Name = updatedPokemon.Name;
