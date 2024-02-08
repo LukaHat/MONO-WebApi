@@ -10,15 +10,21 @@ namespace Example.WebApi.Models
         [Required]
         public int PokemonId { get; set; }
         [Required]
+        public int TrainerId { get; set; }
+        [Required]
         public string Name { get; set; }
         [Required]
         public string Type { get; set; }
+        public string SecondType { get; set; }
 
-        public PokemonCreate(int pokemonId, string name, string type)
+
+        public PokemonCreate(int pokemonId,int trainerId, string name, string type, string secondType)
         {
             this.PokemonId = pokemonId;
+            this.TrainerId = trainerId;
             this.Name = name;
             this.Type = type;
+            this.SecondType = secondType;
         }
     }
 }

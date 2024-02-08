@@ -1,11 +1,15 @@
 ﻿using Example.WebApi.Models;
 using Microsoft.Ajax.Utilities;
+using Npgsql;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Cryptography;
 using System.Web;
 using System.Web.Http;
 
@@ -14,97 +18,149 @@ namespace Example.WebApi.Controllers
     public class PokemonController : ApiController
     {
 
+        private const string connectionString = "Server = 127.0.0.1;Port=5432;Database=postgres;User Id = postgres;Password=2001;";
         static List<Pokemon> pokemonList = new List<Pokemon>
         {
-            new Pokemon(1, "Bulbasaur", "Grass"),
-            new Pokemon(2, "Charmander", "Fire"),
-            new Pokemon(3, "Squirtle", "Water"),
-            new Pokemon(4, "Caterpie", "Bug"),
-            new Pokemon(5, "Metapod", "Bug")
+            new Pokemon(1,1, "Bulbasaur", "Grass", "Water"),
+            new Pokemon(2,1, "Charmander", "Fire"),
+            new Pokemon(3,2,  "Squirtle", "Water"),
+            new Pokemon(4,1, "Caterpie", "Bug"),
+            new Pokemon(5,2, "Metapod", "Bug")
         };
+
+
 
         [HttpGet]
         // GET: api/Pokemon
         public HttpResponseMessage Get([FromUri] PokemonRead pokemon)
         {
-            if (pokemonList == null)
+            List<Pokemon> pokemons = new List<Pokemon>();
+            NpgsqlConnection connection = new NpgsqlConnection(connectionString);
+            using (connection)
             {
-                return Request.CreateResponse(HttpStatusCode.BadRequest, "No pokemons found");
-            }
-
-            IEnumerable<Pokemon> filteredPokemon = pokemonList;
-
-            filteredPokemon = filteredPokemon
-                .Where(p => pokemon.Type == null || p.Type == pokemon.Type)
-                .Where(p => pokemon.Name == null || p.Name == pokemon.Name);
-
-            if (filteredPokemon.Any())
-            {
-                return Request.CreateResponse(HttpStatusCode.OK, filteredPokemon.ToList());
-            } else
-            {
-                return Request.CreateResponse(HttpStatusCode.NotFound, "No pokemons found with selected params");
-            }
+                NpgsqlCommand command = new NpgsqlCommand();
+                command.Connection = connection;
+                command.CommandText = $"SELECT \"Id\" , \"TrainerId\" , \"Name\", \"Type\" , \"SecondType\" FROM \"Pokemon\"";
+            }     
         }
-       
 
         [HttpGet]
         // GET: api/Pokemon/5
-        public HttpResponseMessage Get(int id)
+        public HttpResponseMessage GetPokemonById(int id)
         {
-            Pokemon pokemon = pokemonList.FirstOrDefault(p => p.PokemonId == id);
-            if (pokemon == null)
+            Pokemon pokemon = null;
+            NpgsqlConnection connection = new NpgsqlConnection(connectionString);
+
+            using (connection)
             {
+                NpgsqlCommand command = new NpgsqlCommand();
+                command.CommandText = $"SELECT * FROM \"Pokemon\" WHERE \"Id\" = @id";
+                command.Connection = connection;
+                command.Parameters.AddWithValue("id", id);
+                connection.Open();
+                NpgsqlDataReader reader = command.ExecuteReader();
+                reader.Read();
+                if(reader.HasRows)
+                {
+                    pokemon = new Pokemon(
+                    (int)reader["Id"],
+                    (int)reader["TrainerId"],
+                    (string)reader["Name"],
+                    (string)reader["Type"],
+                    (string)reader["SecondType"]
+                );
+                }
+                connection.Close();
+            }
+            if(pokemon == null) {
                 return Request.CreateResponse(HttpStatusCode.NotFound, "Pokemon not found");
             }
-            else
-            {
-                return Request.CreateResponse(HttpStatusCode.OK, pokemon);
-            }
+            return Request.CreateResponse(HttpStatusCode.OK, pokemon);
         }
+
+
+
 
         [HttpPost]
         // POST: api/Pokemon
         public HttpResponseMessage Post([FromBody] PokemonCreate newPokemon)
         {
-            Pokemon pokemonToAdd = new Pokemon(newPokemon.PokemonId, newPokemon.Name, newPokemon.Type);
-            pokemonList.Add(pokemonToAdd);
-            if (pokemonToAdd == null)
+            NpgsqlConnection connection = new NpgsqlConnection(connectionString);
+            int numberOfAffectedRows;
+
+            using (connection)
             {
-                return Request.CreateResponse(HttpStatusCode.BadRequest, "Pokemon not created");
+                string insert = $"INSERT INTO \"Pokemon\" (\"Id\",\"TrainerId\",\"Name\",\"Type\",\"SecondType\") VALUES (@id,@trainerId,@name,@type,@secondType)";
+                NpgsqlCommand command = new NpgsqlCommand(insert, connection);
+                connection.Open();
+                command.Parameters.AddWithValue("id", newPokemon.PokemonId);
+                command.Parameters.AddWithValue("trainerId", newPokemon.TrainerId);
+                command.Parameters.AddWithValue("name", newPokemon.Name);
+                command.Parameters.AddWithValue("type", newPokemon.Type);
+                command.Parameters.AddWithValue("secondType", newPokemon.SecondType);
+                numberOfAffectedRows = command.ExecuteNonQuery();
+                connection.Close();
             }
-            else
+
+            if (numberOfAffectedRows > 0)
             {
-                return Request.CreateResponse(HttpStatusCode.OK, pokemonList);
+                return Request.CreateResponse(HttpStatusCode.OK, "Pokemon added");
             }
-            
+            return Request.CreateResponse(HttpStatusCode.BadRequest);
+
+
         }
 
         [HttpPut]
         // PUT: api/Pokemon/5
         public HttpResponseMessage Put(int id, [FromBody] PokemonUpdate updatedPokemon)
         {
-            Pokemon pokemonToUpdate = pokemonList.FirstOrDefault(p => p.PokemonId == id);
-            pokemonToUpdate.Name = updatedPokemon.Name;
-            pokemonToUpdate.PokemonId = updatedPokemon.PokemonId;
-            pokemonToUpdate.Type = updatedPokemon.Type;
-            return Request.CreateResponse(HttpStatusCode.OK, updatedPokemon);
+            NpgsqlCommand command = new NpgsqlCommand();
+            command.CommandText = $"UPDATE \"Pokemon\" SET \"TrainerId\"=@trainerId, \"Name\"=@name, \"Type\"=@type, \"SecondType\"=@secondType WHERE \"Id\"=@id";
+            NpgsqlConnection connection = new NpgsqlConnection(connectionString);
+            command.Parameters.AddWithValue("id", id);
+            command.Parameters.AddWithValue("trainerId", updatedPokemon.TrainerId);
+            command.Parameters.AddWithValue("name", updatedPokemon.Name);
+            command.Parameters.AddWithValue("type", updatedPokemon.Type);
+            command.Parameters.AddWithValue("secondType", updatedPokemon.SecondType);
+            int numberOfAffectedRows;
+            using (connection)
+            {
+                connection.Open();
+                numberOfAffectedRows = command.ExecuteNonQuery();
+                connection.Close();
+            }
+            if (numberOfAffectedRows > 0)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, "Pokemon updated");
+            }
+            return Request.CreateResponse(HttpStatusCode.BadRequest);
         }
+
 
         [HttpDelete]
         // DELETE: api/Pokemon/5
         public HttpResponseMessage Delete(int id)
         {
-            Pokemon pokemonToDelete = pokemonList.FirstOrDefault(p => p.PokemonId == id);
-            if(pokemonToDelete != null)
+            NpgsqlCommand command = new NpgsqlCommand();
+            NpgsqlConnection connection = new NpgsqlConnection(connectionString);
+            command.CommandText = $"DELETE FROM \"Pokemon\" WHERE \"Id\"=(@id)";
+            command.Parameters.AddWithValue("id", id);
+            int numberOfAffectedRows;
+            using (connection)
             {
-                pokemonList.Remove(pokemonToDelete);
-                return Request.CreateResponse(HttpStatusCode.BadRequest, "Pokemon not deleted");
+                connection.Open();
+                numberOfAffectedRows = command.ExecuteNonQuery();
+                connection.Close();
             }
-            else
+
+            if (numberOfAffectedRows > 0)
             {
                 return Request.CreateResponse(HttpStatusCode.OK, "Pokemon deleted");
             }
+            return Request.CreateResponse(HttpStatusCode.BadRequest, "Pokemon not deleted");
+
         }
+
     }
 }
