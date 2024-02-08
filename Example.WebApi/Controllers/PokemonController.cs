@@ -1,6 +1,7 @@
 ﻿using Example.WebApi.Models;
 using Microsoft.Ajax.Utilities;
 using Npgsql;
+using NpgsqlTypes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -34,14 +35,58 @@ namespace Example.WebApi.Controllers
         // GET: api/Pokemon
         public HttpResponseMessage Get([FromUri] PokemonRead pokemon)
         {
-            List<Pokemon> pokemons = new List<Pokemon>();
+            List<PokemonRead> pokemons = new List<PokemonRead>();
             NpgsqlConnection connection = new NpgsqlConnection(connectionString);
-            using (connection)
+
+            try
             {
+                connection.Open();
                 NpgsqlCommand command = new NpgsqlCommand();
                 command.Connection = connection;
-                command.CommandText = $"SELECT \"Id\" , \"TrainerId\" , \"Name\", \"Type\" , \"SecondType\" FROM \"Pokemon\"";
-            }     
+
+                if (pokemon == null)
+                {
+                    command.CommandText = "SELECT * FROM \"Pokemon\" LEFT JOIN \"Trainer\" ON \"Trainer\".\"Id\" = \"TrainerId\"";
+                }
+                else
+                {
+                    command.CommandText = "SELECT * FROM \"Pokemon\" LEFT JOIN \"Trainer\" ON \"Trainer\".\"Id\" = \"TrainerId\" WHERE 1=1";
+
+                    if (!string.IsNullOrEmpty(pokemon.Name))
+                    {
+                        command.CommandText += " AND \"Name\" = @Name";
+                        command.Parameters.AddWithValue("@Name", NpgsqlDbType.Text, pokemon.Name);
+                    }
+
+                }
+
+                using (NpgsqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        PokemonRead pokemonRead = new PokemonRead
+                        {
+                            PokemonId = reader["Id"] != DBNull.Value ? Convert.ToInt32(reader["Id"]) : 0,
+                            TrainerId = reader["TrainerId"] != DBNull.Value ? Convert.ToInt32(reader["TrainerId"]) : 0,
+                            Name = reader["Name"] != DBNull.Value ? reader["Name"].ToString() : string.Empty,
+                            Type = reader["Type"] != DBNull.Value ? reader["Type"].ToString() : string.Empty,
+                            SecondType = reader["SecondType"] != DBNull.Value ? reader["SecondType"].ToString() : string.Empty,
+                        };
+
+                        pokemons.Add(pokemonRead);
+                    }
+                }
+
+                return Request.CreateResponse(HttpStatusCode.OK, pokemons);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, $"Internal server error: {ex.Message}");
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
 
         [HttpGet]
@@ -59,9 +104,9 @@ namespace Example.WebApi.Controllers
                 command.Parameters.AddWithValue("id", id);
                 connection.Open();
                 NpgsqlDataReader reader = command.ExecuteReader();
-                reader.Read();
                 if(reader.HasRows)
                 {
+                    reader.Read();
                     pokemon = new Pokemon(
                     (int)reader["Id"],
                     (int)reader["TrainerId"],
@@ -123,6 +168,7 @@ namespace Example.WebApi.Controllers
             command.Parameters.AddWithValue("name", updatedPokemon.Name);
             command.Parameters.AddWithValue("type", updatedPokemon.Type);
             command.Parameters.AddWithValue("secondType", updatedPokemon.SecondType);
+            command.Connection = connection;
             int numberOfAffectedRows;
             using (connection)
             {
@@ -146,6 +192,7 @@ namespace Example.WebApi.Controllers
             NpgsqlConnection connection = new NpgsqlConnection(connectionString);
             command.CommandText = $"DELETE FROM \"Pokemon\" WHERE \"Id\"=(@id)";
             command.Parameters.AddWithValue("id", id);
+            command.Connection = connection;
             int numberOfAffectedRows;
             using (connection)
             {
