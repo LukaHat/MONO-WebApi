@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Npgsql" Version="8.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Example.Model\Example.Model.csproj" />
+    <ProjectReference Include="..\Example.Repository.Common\Example.Repository.Common.csproj" />
   </ItemGroup>
 
 </Project>

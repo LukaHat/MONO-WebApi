@@ -1,0 +1,16 @@
+C:\Users\lukah\mono\MONO-WebApi\Example.Model\bin\Debug\net8.0\Example.Model.deps.json
+C:\Users\lukah\mono\MONO-WebApi\Example.Model\bin\Debug\net8.0\Example.Model.dll
+C:\Users\lukah\mono\MONO-WebApi\Example.Model\bin\Debug\net8.0\Example.Model.pdb
+C:\Users\lukah\mono\MONO-WebApi\Example.Model\bin\Debug\net8.0\Example.Model.Common.dll
+C:\Users\lukah\mono\MONO-WebApi\Example.Model\bin\Debug\net8.0\Example.Model.Common.pdb
+C:\Users\lukah\mono\MONO-WebApi\Example.Model\obj\Debug\net8.0\Example.Model.csproj.AssemblyReference.cache
+C:\Users\lukah\mono\MONO-WebApi\Example.Model\obj\Debug\net8.0\Example.Model.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lukah\mono\MONO-WebApi\Example.Model\obj\Debug\net8.0\Example.Model.AssemblyInfoInputs.cache
+C:\Users\lukah\mono\MONO-WebApi\Example.Model\obj\Debug\net8.0\Example.Model.AssemblyInfo.cs
+C:\Users\lukah\mono\MONO-WebApi\Example.Model\obj\Debug\net8.0\Example.Model.csproj.CoreCompileInputs.cache
+C:\Users\lukah\mono\MONO-WebApi\Example.Model\obj\Debug\net8.0\Example.Model.sourcelink.json
+C:\Users\lukah\mono\MONO-WebApi\Example.Model\obj\Debug\net8.0\Example.Model.csproj.CopyComplete
+C:\Users\lukah\mono\MONO-WebApi\Example.Model\obj\Debug\net8.0\Example.Model.dll
+C:\Users\lukah\mono\MONO-WebApi\Example.Model\obj\Debug\net8.0\refint\Example.Model.dll
+C:\Users\lukah\mono\MONO-WebApi\Example.Model\obj\Debug\net8.0\Example.Model.pdb
+C:\Users\lukah\mono\MONO-WebApi\Example.Model\obj\Debug\net8.0\ref\Example.Model.dll

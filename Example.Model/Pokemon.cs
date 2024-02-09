@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Example.WebApi.Models
 {
-    public class Pokemon
+    public class Pokemon : IPokemon
     {
         public int PokemonId { get; set; }
         public int TrainerId { get; set; }

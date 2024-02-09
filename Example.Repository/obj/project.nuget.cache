@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "bG3FKTRRvCsbCZvRKysogo6GQ1kNPd6t4ZUWPCbYfhMAIpCjjvt5IoiozO+0V79Ik9hE/61uotn0SMaL9vyylA==",
+  "dgSpecHash": "g25AWV+HRRIEyiVqE0lYj1KtxOwyf9E8QV9vGD1k2toosOBEFL+xPmmndn+kYzwkhfxZe/xIWmWPpMCQdmM3ug==",
   "success": true,
   "projectFilePath": "C:\\Users\\lukah\\mono\\MONO-WebApi\\Example.Repository\\Example.Repository.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\lukah\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\lukah\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.0\\microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\lukah\\.nuget\\packages\\npgsql\\8.0.1\\npgsql.8.0.1.nupkg.sha512"
+  ],
   "logs": []
 }
