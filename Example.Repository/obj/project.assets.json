@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net8.0": {}
+    "net8.0": {
+      "Example.Model/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/Example.Model.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Example.Model.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Example.Model/1.0.0": {
+      "type": "project",
+      "path": "../Example.Model/Example.Model.csproj",
+      "msbuildProject": "../Example.Model/Example.Model.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net8.0": []
+    "net8.0": [
+      "Example.Model >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\lukah\\.nuget\\packages\\": {}
@@ -33,7 +52,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\lukah\\mono\\MONO-WebApi\\Example.Model\\Example.Model.csproj": {
+              "projectPath": "C:\\Users\\lukah\\mono\\MONO-WebApi\\Example.Model\\Example.Model.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
