@@ -1,0 +1,6 @@
+C:\Users\lukah\mono\MONO-WebApi\Example.Common\bin\Debug\Example.Common.dll
+C:\Users\lukah\mono\MONO-WebApi\Example.Common\bin\Debug\Example.Common.pdb
+C:\Users\lukah\mono\MONO-WebApi\Example.Common\obj\Debug\Example.Common.csproj.AssemblyReference.cache
+C:\Users\lukah\mono\MONO-WebApi\Example.Common\obj\Debug\Example.Common.csproj.CoreCompileInputs.cache
+C:\Users\lukah\mono\MONO-WebApi\Example.Common\obj\Debug\Example.Common.dll
+C:\Users\lukah\mono\MONO-WebApi\Example.Common\obj\Debug\Example.Common.pdb

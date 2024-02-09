@@ -1,0 +1,11 @@
+C:\Users\lukah\mono\MONO-WebApi\Example.Service.Common\bin\Debug\Example.Service.Common.dll
+C:\Users\lukah\mono\MONO-WebApi\Example.Service.Common\bin\Debug\Example.Service.Common.pdb
+C:\Users\lukah\mono\MONO-WebApi\Example.Service.Common\bin\Debug\Example.Model.dll
+C:\Users\lukah\mono\MONO-WebApi\Example.Service.Common\bin\Debug\Example.Model.Common.dll
+C:\Users\lukah\mono\MONO-WebApi\Example.Service.Common\bin\Debug\Example.Model.pdb
+C:\Users\lukah\mono\MONO-WebApi\Example.Service.Common\bin\Debug\Example.Model.Common.pdb
+C:\Users\lukah\mono\MONO-WebApi\Example.Service.Common\obj\Debug\Example.Service.Common.csproj.AssemblyReference.cache
+C:\Users\lukah\mono\MONO-WebApi\Example.Service.Common\obj\Debug\Example.Service.Common.csproj.CoreCompileInputs.cache
+C:\Users\lukah\mono\MONO-WebApi\Example.Service.Common\obj\Debug\Example.Service.Common.csproj.CopyComplete
+C:\Users\lukah\mono\MONO-WebApi\Example.Service.Common\obj\Debug\Example.Service.Common.dll
+C:\Users\lukah\mono\MONO-WebApi\Example.Service.Common\obj\Debug\Example.Service.Common.pdb

@@ -155,6 +155,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -357,11 +358,15 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Example.Model\Example.Model.csproj">
-      <Project>{4c5efcb8-21d5-4ee8-aaaf-168bef964a31}</Project>
+      <Project>{3f7d9f37-c09e-450c-b895-c668d4f47184}</Project>
       <Name>Example.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Example.Service.Common\Example.Service.Common.csproj">
+      <Project>{2f8af75a-5768-426f-a52f-2d10cbea0525}</Project>
+      <Name>Example.Service.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Example.Service\Example.Service.csproj">
-      <Project>{621d47c0-b585-4e43-85fc-132449287dbf}</Project>
+      <Project>{ef3947f5-3ac5-4413-9aa5-51d526a10c12}</Project>
       <Name>Example.Service</Name>
     </ProjectReference>
   </ItemGroup>

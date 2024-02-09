@@ -1,9 +1,4 @@
 ﻿using Example.Model.Common;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace Example.WebApi.Models
 {

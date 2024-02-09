@@ -317,3 +317,16 @@ C:\Users\lukah\Documents\monowebapi\MONO-WebApi\Example.WebApi\obj\Debug\Example
 C:\Users\lukah\Documents\monowebapi\MONO-WebApi\Example.WebApi\obj\Debug\Example.WebApi.csproj.CopyComplete
 C:\Users\lukah\Documents\monowebapi\MONO-WebApi\Example.WebApi\obj\Debug\Example.WebApi.dll
 C:\Users\lukah\Documents\monowebapi\MONO-WebApi\Example.WebApi\obj\Debug\Example.WebApi.pdb
+C:\Users\lukah\mono\MONO-WebApi\Example.WebApi\bin\Example.Model.dll
+C:\Users\lukah\mono\MONO-WebApi\Example.WebApi\bin\Example.Service.Common.dll
+C:\Users\lukah\mono\MONO-WebApi\Example.WebApi\bin\Example.Service.dll
+C:\Users\lukah\mono\MONO-WebApi\Example.WebApi\bin\Example.Model.Common.dll
+C:\Users\lukah\mono\MONO-WebApi\Example.WebApi\bin\Example.Repository.dll
+C:\Users\lukah\mono\MONO-WebApi\Example.WebApi\bin\Example.Repository.Common.dll
+C:\Users\lukah\mono\MONO-WebApi\Example.WebApi\bin\Example.Model.pdb
+C:\Users\lukah\mono\MONO-WebApi\Example.WebApi\bin\Example.Service.Common.pdb
+C:\Users\lukah\mono\MONO-WebApi\Example.WebApi\bin\Example.Service.pdb
+C:\Users\lukah\mono\MONO-WebApi\Example.WebApi\bin\Example.Model.Common.pdb
+C:\Users\lukah\mono\MONO-WebApi\Example.WebApi\bin\Example.Repository.pdb
+C:\Users\lukah\mono\MONO-WebApi\Example.WebApi\bin\Example.Repository.dll.config
+C:\Users\lukah\mono\MONO-WebApi\Example.WebApi\bin\Example.Repository.Common.pdb

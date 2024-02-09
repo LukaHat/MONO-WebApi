@@ -1,5 +1,7 @@
 ﻿using Example.WebApi.Models;
 using Npgsql;
+using System.Collections.Generic;
+using System;
 using System.Net;
 
 namespace Example.WebApi.Controllers

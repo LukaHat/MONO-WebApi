@@ -1,0 +1,6 @@
+C:\Users\lukah\mono\MONO-WebApi\Example.DAL\bin\Debug\Example.DAL.dll
+C:\Users\lukah\mono\MONO-WebApi\Example.DAL\bin\Debug\Example.DAL.pdb
+C:\Users\lukah\mono\MONO-WebApi\Example.DAL\obj\Debug\Example.DAL.csproj.AssemblyReference.cache
+C:\Users\lukah\mono\MONO-WebApi\Example.DAL\obj\Debug\Example.DAL.csproj.CoreCompileInputs.cache
+C:\Users\lukah\mono\MONO-WebApi\Example.DAL\obj\Debug\Example.DAL.dll
+C:\Users\lukah\mono\MONO-WebApi\Example.DAL\obj\Debug\Example.DAL.pdb

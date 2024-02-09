@@ -1,7 +1,6 @@
 ﻿using Example.Service;
 using Example.Service.Interfaces;
 using Example.WebApi.Models;
-using Example.Model;
 using System.Collections.Generic;
 using System.Web.Http;
 

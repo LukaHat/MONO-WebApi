@@ -11,9 +11,9 @@ namespace Example.WebApi.Models
         public int TrainerId { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }
-        public string SecondType {  get; set; }
+        public string SecondType { get; set; }
 
-        public Pokemon(int pokemonId,int trainerId,  string name, string type, string secondType = null)
+        public Pokemon(int pokemonId, int trainerId, string name, string type, string secondType = null)
         {
             PokemonId = pokemonId;
             TrainerId = trainerId;
@@ -23,5 +23,5 @@ namespace Example.WebApi.Models
         }
     }
 
-        
+
 }
