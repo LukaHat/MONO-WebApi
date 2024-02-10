@@ -10,7 +10,7 @@ namespace Example.WebApi.Controllers
     public class PokemonController : ApiController
     {
         [HttpGet]
-        public HttpResponseMessage GetAllPokemons(PokemonRead pokemon)
+        public HttpResponseMessage GetAllPokemons([FromUri]PokemonRead pokemon)
         {
             PokemonService pokemonService = new PokemonService();
             List<PokemonRead> pokemons = pokemonService.GetAllPokemons(pokemon);
@@ -30,7 +30,7 @@ namespace Example.WebApi.Controllers
         }
 
         [HttpPost]
-        public HttpResponseMessage AddNewPokemon(PokemonCreate newPokemon)
+        public HttpResponseMessage AddNewPokemon([FromBody]PokemonCreate newPokemon)
         {
             PokemonService pokemonService = new PokemonService();
             string result = pokemonService.AddNewPokemon(newPokemon);
@@ -38,7 +38,7 @@ namespace Example.WebApi.Controllers
         }
 
         [HttpPut]
-        public HttpResponseMessage UpdatePokemon(int id, PokemonUpdate updatedPokemon)
+        public HttpResponseMessage UpdatePokemon(int id, [FromBody]PokemonUpdate updatedPokemon)
         {
             PokemonService pokemonService = new PokemonService();
             string result = pokemonService.UpdatePokemon(id, updatedPokemon);
