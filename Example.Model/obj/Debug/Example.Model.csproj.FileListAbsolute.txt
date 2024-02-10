@@ -7,3 +7,12 @@ C:\Users\lukah\mono\MONO-WebApi\Example.Model\obj\Debug\Example.Model.csproj.Cor
 C:\Users\lukah\mono\MONO-WebApi\Example.Model\obj\Debug\Example.Model.csproj.CopyComplete
 C:\Users\lukah\mono\MONO-WebApi\Example.Model\obj\Debug\Example.Model.dll
 C:\Users\lukah\mono\MONO-WebApi\Example.Model\obj\Debug\Example.Model.pdb
+C:\Users\lukah\Documents\monowebapi\MONO-WebApi\Example.Model\bin\Debug\Example.Model.dll
+C:\Users\lukah\Documents\monowebapi\MONO-WebApi\Example.Model\bin\Debug\Example.Model.pdb
+C:\Users\lukah\Documents\monowebapi\MONO-WebApi\Example.Model\bin\Debug\Example.Model.Common.dll
+C:\Users\lukah\Documents\monowebapi\MONO-WebApi\Example.Model\bin\Debug\Example.Model.Common.pdb
+C:\Users\lukah\Documents\monowebapi\MONO-WebApi\Example.Model\obj\Debug\Example.Model.csproj.AssemblyReference.cache
+C:\Users\lukah\Documents\monowebapi\MONO-WebApi\Example.Model\obj\Debug\Example.Model.csproj.CoreCompileInputs.cache
+C:\Users\lukah\Documents\monowebapi\MONO-WebApi\Example.Model\obj\Debug\Example.Model.csproj.CopyComplete
+C:\Users\lukah\Documents\monowebapi\MONO-WebApi\Example.Model\obj\Debug\Example.Model.dll
+C:\Users\lukah\Documents\monowebapi\MONO-WebApi\Example.Model\obj\Debug\Example.Model.pdb

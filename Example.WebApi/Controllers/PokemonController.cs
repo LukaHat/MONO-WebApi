@@ -1,5 +1,4 @@
 ﻿using Example.Service;
-using Example.Service.Interfaces;
 using Example.WebApi.Models;
 using System.Collections.Generic;
 using System.Net;
@@ -10,24 +9,18 @@ namespace Example.WebApi.Controllers
 {
     public class PokemonController : ApiController
     {
-        private readonly IPokemonService pokemonService;
-
-        public PokemonController(IPokemonService pokemonService)
-        {
-            this.pokemonService = pokemonService;
-        }
-
-
         [HttpGet]
         public HttpResponseMessage GetAllPokemons(PokemonRead pokemon)
         {
+            PokemonService pokemonService = new PokemonService();
             List<PokemonRead> pokemons = pokemonService.GetAllPokemons(pokemon);
-            return Request.CreateResponse(HttpStatusCode.OK,pokemons);
+            return Request.CreateResponse(HttpStatusCode.OK, pokemons);
         }
 
         [HttpGet]
         public HttpResponseMessage GetPokemonById(int id)
         {
+            PokemonService pokemonService = new PokemonService();
             Pokemon pokemon = pokemonService.GetPokemonById(id);
             if (pokemon == null)
             {
@@ -39,6 +32,7 @@ namespace Example.WebApi.Controllers
         [HttpPost]
         public HttpResponseMessage AddNewPokemon(PokemonCreate newPokemon)
         {
+            PokemonService pokemonService = new PokemonService();
             string result = pokemonService.AddNewPokemon(newPokemon);
             return Request.CreateResponse(HttpStatusCode.OK, result);
         }
@@ -46,6 +40,7 @@ namespace Example.WebApi.Controllers
         [HttpPut]
         public HttpResponseMessage UpdatePokemon(int id, PokemonUpdate updatedPokemon)
         {
+            PokemonService pokemonService = new PokemonService();
             string result = pokemonService.UpdatePokemon(id, updatedPokemon);
             return Request.CreateResponse(HttpStatusCode.OK, result);
         }
@@ -53,6 +48,7 @@ namespace Example.WebApi.Controllers
         [HttpDelete]
         public HttpResponseMessage DeletePokemon(int id)
         {
+            PokemonService pokemonService = new PokemonService();
             string result = pokemonService.DeletePokemon(id);
             return Request.CreateResponse(HttpStatusCode.OK, result);
         }

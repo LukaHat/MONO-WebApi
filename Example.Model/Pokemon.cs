@@ -13,6 +13,7 @@ namespace Example.WebApi.Models
         public string Type { get; set; }
         public string SecondType { get; set; }
 
+        public Pokemon() { }
         public Pokemon(int pokemonId, int trainerId, string name, string type, string secondType = null)
         {
             PokemonId = pokemonId;

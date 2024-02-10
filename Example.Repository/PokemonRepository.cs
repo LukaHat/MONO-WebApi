@@ -4,6 +4,7 @@ using Npgsql;
 using System.Collections.Generic;
 using System;
 using System.Net;
+using System.Web.Http;
 
 namespace Example.WebApi.Controllers
 {
@@ -14,7 +15,7 @@ namespace Example.WebApi.Controllers
 
 
 
-        public List<PokemonRead> Get(PokemonRead pokemon)
+        public List<PokemonRead> Get([FromUri]PokemonRead pokemon)
         {
             List<PokemonRead> pokemons = new List<PokemonRead>();
             NpgsqlConnection connection = new NpgsqlConnection(connectionString);
