@@ -96,3 +96,9 @@ C:\Users\lukah\Documents\monowebapi\MONO-WebApi\Example.Repository\bin\Debug\Sys
 C:\Users\lukah\Documents\monowebapi\MONO-WebApi\Example.Repository\bin\Debug\Newtonsoft.Json.xml
 C:\Users\lukah\Documents\monowebapi\MONO-WebApi\Example.Repository\bin\Debug\System.Net.Http.Formatting.xml
 C:\Users\lukah\Documents\monowebapi\MONO-WebApi\Example.Repository\bin\Debug\System.Web.Http.xml
+C:\Users\lukah\mono\MONO-WebApi\Example.Repository\bin\Debug\Newtonsoft.Json.dll
+C:\Users\lukah\mono\MONO-WebApi\Example.Repository\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\lukah\mono\MONO-WebApi\Example.Repository\bin\Debug\System.Web.Http.dll
+C:\Users\lukah\mono\MONO-WebApi\Example.Repository\bin\Debug\Newtonsoft.Json.xml
+C:\Users\lukah\mono\MONO-WebApi\Example.Repository\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\lukah\mono\MONO-WebApi\Example.Repository\bin\Debug\System.Web.Http.xml

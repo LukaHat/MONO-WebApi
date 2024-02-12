@@ -1,18 +1,19 @@
 ﻿using Example.WebApi.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Example.Service.Interfaces
 {
     public interface ITrainerService
     {
-        List<TrainerRead> GetAllTrainers(TrainerRead trainer);
+        Task<List<TrainerRead>> GetAllTrainersAsync(TrainerRead trainer);
 
-        Trainer GetTrainerById(int id);
+        Task<Trainer> GetTrainerByIdAsync(int id);
 
-        string AddNewTrainer(TrainerCreate newTrainer);
+        Task<string> AddNewTrainerAsync(TrainerCreate newTrainer);
 
-        string UpdateTrainer(int id, TrainerUpdate updatedTrainer);
+        Task<string> UpdateTrainerAsync(int id, TrainerUpdate updatedTrainer);
 
-        string DeleteTrainer(int id);
+        Task<string> DeleteTrainerAsync(int id);
     }
 }

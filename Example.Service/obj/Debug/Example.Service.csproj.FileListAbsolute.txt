@@ -105,3 +105,10 @@ C:\Users\lukah\Documents\monowebapi\MONO-WebApi\Example.Service\bin\Debug\Newton
 C:\Users\lukah\Documents\monowebapi\MONO-WebApi\Example.Service\bin\Debug\System.Web.Http.xml
 C:\Users\lukah\Documents\monowebapi\MONO-WebApi\Example.Service\bin\Debug\System.Net.Http.Formatting.xml
 C:\Users\lukah\Documents\monowebapi\MONO-WebApi\Example.Service\bin\Debug\Newtonsoft.Json.xml
+C:\Users\lukah\mono\MONO-WebApi\Example.Service\bin\Debug\Example.Service.dll.config
+C:\Users\lukah\mono\MONO-WebApi\Example.Service\bin\Debug\System.Web.Http.dll
+C:\Users\lukah\mono\MONO-WebApi\Example.Service\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\lukah\mono\MONO-WebApi\Example.Service\bin\Debug\Newtonsoft.Json.dll
+C:\Users\lukah\mono\MONO-WebApi\Example.Service\bin\Debug\System.Web.Http.xml
+C:\Users\lukah\mono\MONO-WebApi\Example.Service\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\lukah\mono\MONO-WebApi\Example.Service\bin\Debug\Newtonsoft.Json.xml

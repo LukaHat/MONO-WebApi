@@ -1,43 +1,45 @@
 ﻿using Example.Service.Interfaces;
 using Example.WebApi.Controllers;
+using Example.WebApi.Interfaces;
 using Example.WebApi.Models;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Example.Service
 {
     public class PokemonService : IPokemonService
     {
-        private readonly PokemonRepository pokemonRepository;
+        private readonly IPokemonRepository pokemonRepository;
 
-        public PokemonService()
+        public PokemonService(IPokemonRepository pokemonRepository)
         {
-            pokemonRepository = new PokemonRepository();
+            this.pokemonRepository = pokemonRepository;
         }
 
-        public List<PokemonRead> GetAllPokemons(PokemonRead pokemon)
+        public Task<List<PokemonRead>> GetAllPokemonsAsync(PokemonRead pokemon)
         {
-            return pokemonRepository.Get(pokemon);
+            return pokemonRepository.GetAsync(pokemon);
         }
 
-        public Pokemon GetPokemonById(int id)
+        public Task<Pokemon> GetPokemonByIdAsync(int id)
         {
-            return pokemonRepository.GetPokemonById(id);
+            return pokemonRepository.GetPokemonByIdAsync(id);
         }
 
-        public string AddNewPokemon(PokemonCreate newPokemon)
+        public Task<string> AddNewPokemonAsync(PokemonCreate newPokemon)
         {
-            return pokemonRepository.Post(newPokemon);
+            return pokemonRepository.PostAsync(newPokemon);
         }
 
-        public string UpdatePokemon(int id, PokemonUpdate updatedPokemon)
+        public Task<string> UpdatePokemonAsync(int id, PokemonUpdate updatedPokemon)
         {
-            return pokemonRepository.Put(id, updatedPokemon);
+            return pokemonRepository.PutAsync(id, updatedPokemon);
         }
 
-        public string DeletePokemon(int id)
+        public Task<string> DeletePokemonAsync(int id)
         {
-            return pokemonRepository.Delete(id);
+            return pokemonRepository.DeleteAsync(id);
         }
     }
 }

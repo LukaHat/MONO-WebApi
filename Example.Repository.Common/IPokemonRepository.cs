@@ -1,18 +1,19 @@
 ﻿using Example.WebApi.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Example.WebApi.Interfaces
 {
     public interface IPokemonRepository
     {
-        List<PokemonRead> Get(PokemonRead pokemon);
+        Task<List<PokemonRead>> GetAsync(PokemonRead pokemon);
 
-        Pokemon GetPokemonById(int id);
+        Task<Pokemon> GetPokemonByIdAsync(int id);
 
-        string Post(PokemonCreate newPokemon);
+        Task<string> PostAsync(PokemonCreate newPokemon);
 
-        string Put(int id, PokemonUpdate updatedPokemon);
+        Task<string> PutAsync(int id, PokemonUpdate updatedPokemon);
 
-        string Delete(int id);
+        Task<string> DeleteAsync(int id);
     }
 }

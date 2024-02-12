@@ -1,18 +1,19 @@
 ﻿using Example.WebApi.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Example.WebApi.Interfaces
 {
     public interface ITrainerRepository
     {
-        List<TrainerRead> Get(TrainerRead trainer);
+        Task<List<TrainerRead>> GetAsync(TrainerRead trainer);
 
-        Trainer GetTrainerById(int id);
+        Task<Trainer> GetTrainerByIdAsync(int id);
 
-        string Post(TrainerCreate newTrainer);
+        Task<string> PostAsync(TrainerCreate newTrainer);
 
-        string Put(int id, TrainerUpdate updatedTrainer);
+        Task<string> PutAsync(int id, TrainerUpdate updatedTrainer);
 
-        string Delete(int id);
+        Task<string> DeleteAsync(int id);
     }
 }

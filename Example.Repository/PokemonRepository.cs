@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System;
 using System.Net;
 using System.Web.Http;
+using System.Threading.Tasks;
 
 namespace Example.WebApi.Controllers
 {
@@ -15,7 +16,7 @@ namespace Example.WebApi.Controllers
 
 
 
-        public List<PokemonRead> Get([FromUri]PokemonRead pokemon)
+        public async Task<List<PokemonRead>> GetAsync([FromUri]PokemonRead pokemon)
         {
             List<PokemonRead> pokemons = new List<PokemonRead>();
             NpgsqlConnection connection = new NpgsqlConnection(connectionString);
@@ -29,9 +30,9 @@ namespace Example.WebApi.Controllers
                     command.Connection = connection;
                     command.CommandText = $"SELECT * FROM \"Pokemon\" LEFT JOIN \"Trainer\" ON \"Trainer\".\"Id\" = \"TrainerId\"";
 
-                    using (NpgsqlDataReader reader = command.ExecuteReader())
+                    using (NpgsqlDataReader reader = await command.ExecuteReaderAsync())
                     {
-                        while (reader.Read())
+                         while (reader.Read())
                         {
                             PokemonRead pokemonRead = new PokemonRead
                             {
@@ -42,7 +43,7 @@ namespace Example.WebApi.Controllers
                                 SecondType = reader["SecondType"] != DBNull.Value ? reader["SecondType"].ToString() : string.Empty,
                             };
 
-                            pokemons.Add(pokemonRead);
+                           pokemons.Add(pokemonRead);
                         }
                     }
                 }
@@ -107,7 +108,7 @@ namespace Example.WebApi.Controllers
             return pokemons;
         }
 
-        public Pokemon GetPokemonById(int id)
+        public async Task<Pokemon> GetPokemonByIdAsync(int id)
         {
             Pokemon pokemon = null;
             NpgsqlConnection connection = new NpgsqlConnection(connectionString);
@@ -119,7 +120,7 @@ namespace Example.WebApi.Controllers
                 command.Connection = connection;
                 command.Parameters.AddWithValue("id", id);
                 connection.Open();
-                NpgsqlDataReader reader = command.ExecuteReader();
+                NpgsqlDataReader reader = await command.ExecuteReaderAsync();
                 if (reader.HasRows)
                 {
                     reader.Read();
@@ -137,7 +138,7 @@ namespace Example.WebApi.Controllers
         }
 
 
-        private bool PokemonExists(int id)
+        private async Task<bool> PokemonExistsAsync(int id)
         {
             Pokemon pokemon = null;
             NpgsqlConnection connection = new NpgsqlConnection(connectionString);
@@ -149,7 +150,7 @@ namespace Example.WebApi.Controllers
                 command.Connection = connection;
                 command.Parameters.AddWithValue("id", id);
                 connection.Open();
-                NpgsqlDataReader reader = command.ExecuteReader();
+                NpgsqlDataReader reader = await command.ExecuteReaderAsync();
                 if (reader.HasRows)
                 {
                     reader.Read();
@@ -170,7 +171,7 @@ namespace Example.WebApi.Controllers
             return true;
         }
 
-        private Pokemon FetchPokemon(int id)
+        private async Task<Pokemon> FetchPokemonAsync(int id)
         {
             Pokemon pokemon = null;
             NpgsqlConnection connection = new NpgsqlConnection(connectionString);
@@ -182,7 +183,7 @@ namespace Example.WebApi.Controllers
                 command.Connection = connection;
                 command.Parameters.AddWithValue("id", id);
                 connection.Open();
-                NpgsqlDataReader reader = command.ExecuteReader();
+                NpgsqlDataReader reader = await command.ExecuteReaderAsync();
                 if (reader.HasRows)
                 {
                     reader.Read();
@@ -201,7 +202,7 @@ namespace Example.WebApi.Controllers
 
 
 
-        public string Post(PokemonCreate newPokemon)
+        public async Task<string> PostAsync(PokemonCreate newPokemon)
         {
             NpgsqlConnection connection = new NpgsqlConnection(connectionString);
             int numberOfAffectedRows;
@@ -216,7 +217,7 @@ namespace Example.WebApi.Controllers
                 command.Parameters.AddWithValue("name", newPokemon.Name);
                 command.Parameters.AddWithValue("type", newPokemon.Type);
                 command.Parameters.AddWithValue("secondType", newPokemon.SecondType);
-                numberOfAffectedRows = command.ExecuteNonQuery();
+                numberOfAffectedRows = await command.ExecuteNonQueryAsync();
                 connection.Close();
             }
 
@@ -230,20 +231,20 @@ namespace Example.WebApi.Controllers
         }
 
 
-        public string Put(int id, PokemonUpdate updatedPokemon)
+        public async Task<string> PutAsync(int id, PokemonUpdate updatedPokemon)
         {
             if (updatedPokemon == null)
             {
                 return ("");
             }
-            else if (PokemonExists(id) == false)
+            else if (await PokemonExistsAsync(id) == false)
             {
                 return ("Pokemon not found");
             }
             else
             {
 
-                Pokemon pokemonToUpdate = FetchPokemon(id);
+                Pokemon pokemonToUpdate = await FetchPokemonAsync(id);
                 List<string> conditions = new List<string>();
                 NpgsqlCommand command = new NpgsqlCommand();
                 string baseQuery = $"UPDATE \"Pokemon\" SET ";
@@ -291,7 +292,7 @@ namespace Example.WebApi.Controllers
                 using (connection)
                 {
                     connection.Open();
-                    numberOfAffectedRows = command.ExecuteNonQuery();
+                    numberOfAffectedRows = await command.ExecuteNonQueryAsync();
                     connection.Close();
                 }
                 if (numberOfAffectedRows > 0)
@@ -303,13 +304,13 @@ namespace Example.WebApi.Controllers
         }
 
 
-        public string Delete(int id)
+        public async Task<string> DeleteAsync(int id)
         {
             if (id == 0)
             {
                 return ("Pokemon under that it does not exist");
             }
-            else if (PokemonExists(id) == false)
+            else if (await PokemonExistsAsync(id) == false)
             {
                 return ("Pokemon not found");
             }
@@ -324,7 +325,7 @@ namespace Example.WebApi.Controllers
                 using (connection)
                 {
                     connection.Open();
-                    numberOfAffectedRows = command.ExecuteNonQuery();
+                    numberOfAffectedRows = await command.ExecuteNonQueryAsync();
                     connection.Close();
                 }
 

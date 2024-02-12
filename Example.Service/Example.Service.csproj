@@ -50,6 +50,10 @@
       <Project>{3f7d9f37-c09e-450c-b895-c668d4f47184}</Project>
       <Name>Example.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Example.Repository.Common\Example.Repository.Common.csproj">
+      <Project>{95A6E3DD-3F33-425C-826E-434C9D282A73}</Project>
+      <Name>Example.Repository.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Example.Repository\Example.Repository.csproj">
       <Project>{41830f24-2a7e-4c44-a4ae-70eeedb310a2}</Project>
       <Name>Example.Repository</Name>

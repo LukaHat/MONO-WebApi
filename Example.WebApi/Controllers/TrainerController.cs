@@ -2,6 +2,9 @@
 using Example.Service.Interfaces;
 using Example.WebApi.Models;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace Example.WebApi.Controllers
@@ -17,42 +20,42 @@ namespace Example.WebApi.Controllers
 
 
         [HttpGet]
-        public IHttpActionResult GetAllTrainers(TrainerRead trainer)
+        public HttpResponseMessage GetAllTrainers(TrainerRead trainer)
         {
-            List<TrainerRead> trainers = trainerService.GetAllTrainers(trainer);
-            return Ok(trainers);
+            Task<List<TrainerRead>> trainers = trainerService.GetAllTrainersAsync(trainer);
+            return Request.CreateResponse(HttpStatusCode.OK, trainers.Result);
         }
 
         [HttpGet]
-        public IHttpActionResult GetTrainerById(int id)
+        public HttpResponseMessage GetTrainerById(int id)
         {
-            Trainer trainer = trainerService.GetTrainerById(id);
+            Task<Trainer> trainer = trainerService.GetTrainerByIdAsync(id);
             if (trainer == null)
             {
-                return NotFound();
+                return Request.CreateResponse(HttpStatusCode.NotFound);
             }
-            return Ok(trainer);
+            return Request.CreateResponse(HttpStatusCode.OK, trainer.Result);
         }
 
         [HttpPost]
-        public IHttpActionResult AddNewTrainer(TrainerCreate newTrainer)
+        public HttpResponseMessage AddNewTrainer(TrainerCreate newTrainer)
         {
-            string result = trainerService.AddNewTrainer(newTrainer);
-            return Ok(result);
+            Task<string> result = trainerService.AddNewTrainerAsync(newTrainer);
+            return Request.CreateResponse(HttpStatusCode.OK, result.Result);
         }
 
         [HttpPut]
-        public IHttpActionResult UpdateTrainer(int id, TrainerUpdate updatedTrainer)
+        public HttpResponseMessage UpdateTrainer(int id, TrainerUpdate updatedTrainer)
         {
-            string result = trainerService.UpdateTrainer(id, updatedTrainer);
-            return Ok(result);
+            Task<string> result = trainerService.UpdateTrainerAsync(id, updatedTrainer);
+            return Request.CreateResponse(HttpStatusCode.OK, result.Result);
         }
 
         [HttpDelete]
-        public IHttpActionResult DeleteTrainer(int id)
+        public HttpResponseMessage DeleteTrainer(int id)
         {
-            string result = trainerService.DeleteTrainer(id);
-            return Ok(result);
+            Task<string> result = trainerService.DeleteTrainerAsync(id);
+            return Request.CreateResponse(HttpStatusCode.OK, result.Result);
         }
     }
 }

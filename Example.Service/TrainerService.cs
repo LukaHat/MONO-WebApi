@@ -1,43 +1,45 @@
 ﻿using Example.Service.Interfaces;
 using Example.WebApi.Controllers;
+using Example.WebApi.Interfaces;
 using Example.WebApi.Models;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Example.Service
 {
     public class TrainerService : ITrainerService
     {
-        private readonly TrainerRepository trainerRepository;
+        private readonly ITrainerRepository trainerRepository;
 
-        public TrainerService()
+        public TrainerService(ITrainerRepository trainerRepository)
         {
-            trainerRepository = new TrainerRepository();
+            this.trainerRepository = trainerRepository;
         }
 
-        public List<TrainerRead> GetAllTrainers(TrainerRead trainer)
+        public Task<List<TrainerRead>> GetAllTrainersAsync(TrainerRead trainer)
         {
-            return trainerRepository.Get(trainer);
+            return trainerRepository.GetAsync(trainer);
         }
 
-        public Trainer GetTrainerById(int id)
+        public Task<Trainer> GetTrainerByIdAsync(int id)
         {
-            return trainerRepository.GetTrainerById(id);
+            return trainerRepository.GetTrainerByIdAsync(id);
         }
 
-        public string AddNewTrainer(TrainerCreate newTrainer)
+        public Task<string> AddNewTrainerAsync(TrainerCreate newTrainer)
         {
-            return trainerRepository.Post(newTrainer);
+            return trainerRepository.PostAsync(newTrainer);
         }
 
-        public string UpdateTrainer(int id, TrainerUpdate updatedTrainer)
+        public Task<string> UpdateTrainerAsync(int id, TrainerUpdate updatedTrainer)
         {
-            return trainerRepository.Put(id, updatedTrainer);
+            return trainerRepository.PutAsync(id, updatedTrainer);
         }
 
-        public string DeleteTrainer(int id)
+        public Task<string> DeleteTrainerAsync(int id)
         {
-            return trainerRepository.Delete(id);
+            return trainerRepository.DeleteAsync(id);
         }
     }
 }

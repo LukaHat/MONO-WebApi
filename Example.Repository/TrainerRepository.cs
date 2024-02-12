@@ -3,16 +3,18 @@ using Npgsql;
 using System.Collections.Generic;
 using System;
 using System.Net;
+using Example.WebApi.Interfaces;
+using System.Threading.Tasks;
 
 namespace Example.WebApi.Controllers
 {
-    public class TrainerRepository
+    public class TrainerRepository : ITrainerRepository
     {
 
         private const string connectionString = "Server = 127.0.0.1;Port=5432;Database=postgres;User Id = postgres;Password=2001;";
 
 
-        public List<TrainerRead> Get(TrainerRead trainer)
+        public async Task<List<TrainerRead>> GetAsync(TrainerRead trainer)
         {
             List<TrainerRead> trainers = new List<TrainerRead>();
             NpgsqlConnection connection = new NpgsqlConnection(connectionString);
@@ -26,7 +28,7 @@ namespace Example.WebApi.Controllers
                     command.Connection = connection;
                     command.CommandText = $"SELECT * FROM \"Trainer\" LEFT JOIN \"Pokemon\" ON \"Trainer\".\"Id\" = \"TrainerId\"";
 
-                    using (NpgsqlDataReader reader = command.ExecuteReader())
+                    using (NpgsqlDataReader reader = await command.ExecuteReaderAsync())
                     {
                         while (reader.Read())
                         {
@@ -69,7 +71,7 @@ namespace Example.WebApi.Controllers
                     }
                     string conditionsText = String.Join(" AND ", conditions);
                     command.CommandText = baseQuery + conditionsText;
-                    using (NpgsqlDataReader reader = command.ExecuteReader())
+                    using (NpgsqlDataReader reader = await command.ExecuteReaderAsync())
                     {
                         while (reader.Read())
                         {
@@ -91,7 +93,7 @@ namespace Example.WebApi.Controllers
         }
 
 
-        public Trainer GetTrainerById(int id)
+        public async Task<Trainer> GetTrainerByIdAsync(int id)
         {
             Trainer trainer = null;
             NpgsqlConnection connection = new NpgsqlConnection(connectionString);
@@ -103,7 +105,7 @@ namespace Example.WebApi.Controllers
                 command.Connection = connection;
                 command.Parameters.AddWithValue("id", id);
                 connection.Open();
-                NpgsqlDataReader reader = command.ExecuteReader();
+                NpgsqlDataReader reader = await command.ExecuteReaderAsync();
                 if (reader.HasRows)
                 {
                     reader.Read();
@@ -119,7 +121,7 @@ namespace Example.WebApi.Controllers
         }
 
 
-        private bool TrainerExists(int id)
+        private async Task<bool> TrainerExistsAsync(int id)
         {
             Trainer trainer = null;
             NpgsqlConnection connection = new NpgsqlConnection(connectionString);
@@ -131,7 +133,7 @@ namespace Example.WebApi.Controllers
                 command.Connection = connection;
                 command.Parameters.AddWithValue("id", id);
                 connection.Open();
-                NpgsqlDataReader reader = command.ExecuteReader();
+                NpgsqlDataReader reader = await command.ExecuteReaderAsync();
                 if (reader.HasRows)
                 {
                     reader.Read();
@@ -150,7 +152,7 @@ namespace Example.WebApi.Controllers
             return true;
         }
 
-        private Trainer FetchTrainer(int id)
+        private async Task<Trainer> FetchTrainerAsync(int id)
         {
             Trainer trainer = null;
             NpgsqlConnection connection = new NpgsqlConnection(connectionString);
@@ -162,7 +164,7 @@ namespace Example.WebApi.Controllers
                 command.Connection = connection;
                 command.Parameters.AddWithValue("id", id);
                 connection.Open();
-                NpgsqlDataReader reader = command.ExecuteReader();
+                NpgsqlDataReader reader = await command.ExecuteReaderAsync();
                 if (reader.HasRows)
                 {
                     reader.Read();
@@ -181,7 +183,7 @@ namespace Example.WebApi.Controllers
 
 
 
-        public string Post(TrainerCreate newTrainer)
+        public async Task<string> PostAsync(TrainerCreate newTrainer)
         {
             NpgsqlConnection connection = new NpgsqlConnection(connectionString);
             int numberOfAffectedRows;
@@ -194,7 +196,7 @@ namespace Example.WebApi.Controllers
                 command.Parameters.AddWithValue("id", newTrainer.Id);
                 command.Parameters.AddWithValue("name", newTrainer.Name);
                 command.Parameters.AddWithValue("age", newTrainer.Age);
-                numberOfAffectedRows = command.ExecuteNonQuery();
+                numberOfAffectedRows = await command.ExecuteNonQueryAsync();
                 connection.Close();
             }
 
@@ -208,20 +210,20 @@ namespace Example.WebApi.Controllers
         }
 
 
-        public string Put(int id, TrainerUpdate updatedTrainer)
+        public async Task<string> PutAsync(int id, TrainerUpdate updatedTrainer)
         {
             if (updatedTrainer == null)
             {
                 return ("Invalid data in request body");
             }
-            else if (TrainerExists(id) == false)
+            else if (await TrainerExistsAsync(id) == false)
             {
                 return ("Trainer not found");
             }
             else
             {
 
-                Trainer trainerToUpdate = FetchTrainer(id);
+                Trainer trainerToUpdate = await FetchTrainerAsync(id);
                 List<string> conditions = new List<string>();
                 NpgsqlCommand command = new NpgsqlCommand();
                 string baseQuery = $"UPDATE \"Trainer\" SET ";
@@ -257,7 +259,7 @@ namespace Example.WebApi.Controllers
                 using (connection)
                 {
                     connection.Open();
-                    numberOfAffectedRows = command.ExecuteNonQuery();
+                    numberOfAffectedRows = await command.ExecuteNonQueryAsync();
                     connection.Close();
                 }
                 if (numberOfAffectedRows > 0)
@@ -270,13 +272,13 @@ namespace Example.WebApi.Controllers
 
 
 
-        public string Delete(int id)
+        public async Task<string> DeleteAsync(int id)
         {
             if (id == 0)
             {
                 return ("Invalid id");
             }
-            else if (TrainerExists(id) == false)
+            else if (await TrainerExistsAsync(id) == false)
             {
                 return ("Trainer not found");
             }
@@ -291,7 +293,7 @@ namespace Example.WebApi.Controllers
                 using (connection)
                 {
                     connection.Open();
-                    numberOfAffectedRows = command.ExecuteNonQuery();
+                    numberOfAffectedRows = await command.ExecuteNonQueryAsync();
                     connection.Close();
                 }
 
