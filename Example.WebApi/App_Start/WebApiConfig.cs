@@ -1,7 +1,15 @@
-﻿using System;
+﻿using Autofac;
+using Autofac.Integration.WebApi;
+using Example.Service;
+using Example.Service.Interfaces;
+using Example.WebApi.Controllers;
+using Example.WebApi.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web.Http;
+using System.Web.Mvc;
 
 namespace Example.WebApi
 {

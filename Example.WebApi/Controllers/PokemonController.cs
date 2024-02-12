@@ -33,7 +33,7 @@ namespace Example.WebApi.Controllers
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
-            return Request.CreateResponse(HttpStatusCode.OK, pokemon.Result);
+            return Request.CreateResponse(HttpStatusCode.OK, pokemon);
         }
 
         [HttpPost]

@@ -345,3 +345,11 @@ C:\Users\lukah\Documents\monowebapi\MONO-WebApi\Example.WebApi\bin\Example.Repos
 C:\Users\lukah\Documents\monowebapi\MONO-WebApi\Example.WebApi\bin\Example.Repository.Common.pdb
 C:\Users\lukah\Documents\monowebapi\MONO-WebApi\Example.WebApi\bin\Example.Service.dll.config
 C:\Users\lukah\mono\MONO-WebApi\Example.WebApi\bin\Example.Service.dll.config
+C:\Users\lukah\mono\MONO-WebApi\Example.WebApi\bin\Autofac.dll
+C:\Users\lukah\mono\MONO-WebApi\Example.WebApi\bin\Autofac.Integration.WebApi.dll
+C:\Users\lukah\mono\MONO-WebApi\Example.WebApi\bin\Example.Model.dll.config
+C:\Users\lukah\mono\MONO-WebApi\Example.WebApi\bin\Example.Repository.Common.dll.config
+C:\Users\lukah\mono\MONO-WebApi\Example.WebApi\bin\Example.Service.Common.dll.config
+C:\Users\lukah\mono\MONO-WebApi\Example.WebApi\bin\Autofac.xml
+C:\Users\lukah\mono\MONO-WebApi\Example.WebApi\bin\Autofac.Integration.WebApi.xml
+C:\Users\lukah\mono\MONO-WebApi\Example.WebApi\bin\Example.Model.Common.dll.config
