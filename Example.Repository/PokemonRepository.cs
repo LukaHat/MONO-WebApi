@@ -7,6 +7,8 @@ using System.Net;
 using System.Web.Http;
 using System.Threading.Tasks;
 using System.Text;
+using System.Diagnostics.Eventing.Reader;
+using Example.Common;
 
 namespace Example.WebApi.Controllers
 {
@@ -15,9 +17,8 @@ namespace Example.WebApi.Controllers
 
         private const string connectionString = "Server = 127.0.0.1;Port=5432;Database=postgres;User Id = postgres;Password=2001;";
 
-
-
-        public async Task<List<PokemonRead>> GetAsync([FromUri]PokemonRead pokemon)
+        [HttpGet]
+        public async Task<List<PokemonRead>> GetAsync(PokemonFilter filter, Paging paging, Sorting sorting)
         {
             List<PokemonRead> pokemons = new List<PokemonRead>();
             NpgsqlConnection connection = new NpgsqlConnection(connectionString);
@@ -26,7 +27,9 @@ namespace Example.WebApi.Controllers
                 connection.Open();
                 NpgsqlCommand command = new NpgsqlCommand();
                 command.Connection = connection;
-                command.CommandText = Filter(pokemon);
+                command.CommandText = ApplyFilter(filter, command);
+                command.CommandText += ApplySorting(sorting, command);
+                command.CommandText  += ApplyPaging(paging, command);
                 using (NpgsqlDataReader reader = await command.ExecuteReaderAsync())
                 {
                     while (reader.Read())
@@ -44,49 +47,62 @@ namespace Example.WebApi.Controllers
                 }
             }
             return pokemons;
+
         }
 
-
-        private string Filter(PokemonRead pokemon)
+        private string ApplyFilter(PokemonFilter pokemonFilter, NpgsqlCommand command)
         {
             StringBuilder filter = new StringBuilder();
-            if(pokemon.Name != null)
+            filter.Append($"SELECT * FROM \"Pokemon\" LEFT JOIN \"Trainer\" ON \"Trainer\".\"Id\" = \"TrainerId\" WHERE 1=1");
+            if (pokemonFilter.NameQuery != "")
             {
-                filter.Append($"\"Pokemon\".\"Name\" = '{pokemon.Name}'");
+                filter.Append(" AND \"Pokemon\".\"Name\" LIKE @nameQuery");
+                command.Parameters.AddWithValue("@nameQuery", $"%{pokemonFilter.NameQuery}%");
             }
-            if(pokemon.Type != null)
+            if(pokemonFilter.TypeQuery != "")
             {
-                if (filter.Length > 0)
-                {
-                    filter.Append(" AND ");
-                }
-                filter.Append($"\"Pokemon\".\"Type\" = '{pokemon.Type}'");
+                filter.Append(" AND \"Pokemon\".\"Type\" LIKE @typeQuery");
+                command.Parameters.AddWithValue("@typeQuery", $"%{pokemonFilter.TypeQuery}%");
             }
-            if(pokemon.SecondType != null)
+            if(pokemonFilter.TrainerId != 0)
             {
-
-                if (filter.Length > 0)
-                {
-                    filter.Append(" AND ");
-                }
-                filter.Append($"\"Pokemon\".\"SecondType\" = '{pokemon.SecondType}'");
+                filter.Append(" AND \"Pokemon\".\"TrainerId\" = @trainerId");
+                command.Parameters.AddWithValue("@trainerId", pokemonFilter.TrainerId);
             }
-            if(pokemon.TrainerId != 0)
+            if(pokemonFilter.SecondTypeQuery != "")
             {
-
-                if (filter.Length > 0)
-                {
-                    filter.Append(" AND ");
-                }
-                filter.Append($"\"Pokemon\".\"TrainerId\" = '{pokemon.TrainerId}'");
+                filter.Append(" AND \"Pokemon\".\"SecondType\" = @secondType");
+                command.Parameters.AddWithValue("secondType", $"%{pokemonFilter.SecondTypeQuery}%");
             }
-            if(filter.Length > 0)
-            {
-                filter.Insert(0, " AND ");
-            }
-            filter.Insert(0, $"SELECT * FROM \"Pokemon\" LEFT JOIN \"Trainer\" ON \"Trainer\".\"Id\" = \"TrainerId\" WHERE 1=1");
             return filter.ToString();
         }
+
+        private string ApplyPaging(Paging paging, NpgsqlCommand command)
+        {
+            StringBuilder page = new StringBuilder();
+            if (paging.PageNum > 0)
+            {
+                page.Append(" OFFSET @offset");
+                command.Parameters.AddWithValue("@offset", paging.PageNum * paging.PageSize);
+            }
+            return page.ToString();
+        }
+
+        private string ApplySorting(Sorting sorting, NpgsqlCommand command)
+        {
+            StringBuilder sort = new StringBuilder();
+            if (sorting.SortBy != "TrainerId")
+            {
+                sort.Append(" ORDER BY " + sorting.SortBy);
+            }
+            if (sorting.SortOrder != "ASC")
+            {
+                sort.Append(sorting.SortOrder);
+            }
+            return sort.ToString();
+            
+        }
+
 
 
 

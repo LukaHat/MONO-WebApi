@@ -1,4 +1,5 @@
-﻿using Example.WebApi.Models;
+﻿using Example.Common;
+using Example.WebApi.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -6,7 +7,7 @@ namespace Example.WebApi.Interfaces
 {
     public interface IPokemonRepository
     {
-        Task<List<PokemonRead>> GetAsync(PokemonRead pokemon);
+        Task<List<PokemonRead>> GetAsync(PokemonFilter filter, Paging paging, Sorting sorting);
 
         Task<Pokemon> GetPokemonByIdAsync(int id);
 

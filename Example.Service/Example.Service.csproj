@@ -80,6 +80,10 @@
     <Compile Include="TrainerService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Example.Common\Example.Common.csproj">
+      <Project>{76000ead-a35e-42b2-b720-2bf2ce5716ae}</Project>
+      <Name>Example.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Example.Model\Example.Model.csproj">
       <Project>{3f7d9f37-c09e-450c-b895-c668d4f47184}</Project>
       <Name>Example.Model</Name>

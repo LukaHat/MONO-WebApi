@@ -1,4 +1,5 @@
-﻿using Example.Service.Interfaces;
+﻿using Example.Common;
+using Example.Service.Interfaces;
 using Example.WebApi.Controllers;
 using Example.WebApi.Interfaces;
 using Example.WebApi.Models;
@@ -17,9 +18,23 @@ namespace Example.Service
             this.pokemonRepository = pokemonRepository;
         }
 
-        public async Task<List<PokemonRead>> GetAllPokemonsAsync(PokemonRead pokemon)
+        public async Task<List<PokemonRead>> GetAllPokemonsAsync(string nameQuery = "", string typeQuery ="", string secondTypeQuery = "", int trainerId = 0, int pageNum = 1, int pageSize = 10, string sortOrder = "ASC", string sortBy = "TrainerId")
         {
-            Task<List<PokemonRead>> result = pokemonRepository.GetAsync(pokemon);
+            PokemonFilter filter = new PokemonFilter();
+            filter.NameQuery = nameQuery;
+            filter.TypeQuery = typeQuery;
+            filter.SecondTypeQuery = secondTypeQuery;
+            filter.TrainerId = trainerId;
+
+            Paging paging = new Paging();
+            paging.PageNum = pageNum;
+            paging.PageSize = pageSize;
+
+            Sorting sorting = new Sorting();
+            sorting.SortBy = sortBy;
+            sorting.SortOrder = sortOrder;
+
+            Task<List<PokemonRead>> result = pokemonRepository.GetAsync(filter, paging, sorting);
             await result;
             return result.Result;
         }

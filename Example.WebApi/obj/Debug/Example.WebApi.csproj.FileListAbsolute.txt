@@ -353,3 +353,6 @@ C:\Users\lukah\mono\MONO-WebApi\Example.WebApi\bin\Example.Service.Common.dll.co
 C:\Users\lukah\mono\MONO-WebApi\Example.WebApi\bin\Autofac.xml
 C:\Users\lukah\mono\MONO-WebApi\Example.WebApi\bin\Autofac.Integration.WebApi.xml
 C:\Users\lukah\mono\MONO-WebApi\Example.WebApi\bin\Example.Model.Common.dll.config
+C:\Users\lukah\mono\MONO-WebApi\Example.WebApi\bin\Example.Common.dll
+C:\Users\lukah\mono\MONO-WebApi\Example.WebApi\bin\Example.Common.pdb
+C:\Users\lukah\mono\MONO-WebApi\Example.WebApi\bin\Example.Common.dll.config

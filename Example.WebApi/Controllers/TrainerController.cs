@@ -20,7 +20,7 @@ namespace Example.WebApi.Controllers
 
 
         [HttpGet]
-        public async Task<HttpResponseMessage> GetAllTrainers(TrainerRead trainer)
+        public async Task<HttpResponseMessage> GetAllTrainers([FromUri]TrainerRead trainer)
         {
             Task<List<TrainerRead>> trainers = trainerService.GetAllTrainersAsync(trainer);
             await trainers;

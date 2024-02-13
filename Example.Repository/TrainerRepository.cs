@@ -5,6 +5,9 @@ using System;
 using System.Net;
 using Example.WebApi.Interfaces;
 using System.Threading.Tasks;
+using System.Text;
+using System.Xml.Linq;
+using System.Web.Http;
 
 namespace Example.WebApi.Controllers
 {
@@ -14,82 +17,49 @@ namespace Example.WebApi.Controllers
         private const string connectionString = "Server = 127.0.0.1;Port=5432;Database=postgres;User Id = postgres;Password=2001;";
 
 
-        public async Task<List<TrainerRead>> GetAsync(TrainerRead trainer)
+        public async Task<List<TrainerRead>> GetAsync([FromUri]TrainerRead trainer)
         {
+
             List<TrainerRead> trainers = new List<TrainerRead>();
             NpgsqlConnection connection = new NpgsqlConnection(connectionString);
-
-            if (trainer == null)
+            using (connection)
             {
-                using (connection)
+                connection.Open();
+                NpgsqlCommand command = new NpgsqlCommand();
+                command.Connection = connection;
+                command.CommandText = ApplyFilter(trainer, command);
+                using (NpgsqlDataReader reader = await command.ExecuteReaderAsync())
                 {
-                    connection.Open();
-                    NpgsqlCommand command = new NpgsqlCommand();
-                    command.Connection = connection;
-                    command.CommandText = $"SELECT * FROM \"Trainer\" LEFT JOIN \"Pokemon\" ON \"Trainer\".\"Id\" = \"TrainerId\"";
-
-                    using (NpgsqlDataReader reader = await command.ExecuteReaderAsync())
+                    while (reader.Read())
                     {
-                        while (reader.Read())
+                        TrainerRead trainerRead = new TrainerRead
                         {
-                            TrainerRead trainerRead = new TrainerRead
-                            {
-                                Id = reader["Id"] != DBNull.Value ? Convert.ToInt32(reader["Id"]) : 0,
-                                Name = reader["Name"] != DBNull.Value ? reader["Name"].ToString() : string.Empty,
-                                Age = reader["TrainerId"] != DBNull.Value ? Convert.ToInt32(reader["Age"]) : 0
-                            };
-
-                            trainers.Add(trainerRead);
-                        }
+                            Id = reader["Id"] != DBNull.Value ? Convert.ToInt32(reader["Id"]) : 0,
+                            Name = reader["Name"] != DBNull.Value ? reader["Name"].ToString() : string.Empty,
+                            Age = reader["TrainerId"] != DBNull.Value ? Convert.ToInt32(reader["Age"]) : 0
+                        };
+                        trainers.Add(trainerRead);
                     }
-                }
-            }
-            else
-            {
-                using (connection)
-                {
-                    connection.Open();
-                    NpgsqlCommand command = new NpgsqlCommand();
-                    command.Connection = connection;
-                    List<string> conditions = new List<string>();
-                    if (trainer.Name != null)
-                    {
-                        string filter1 = $"\"Trainer\".\"Name\" = @name";
-                        command.Parameters.AddWithValue("name", trainer.Name);
-                        conditions.Add(filter1);
-                    }
-                    if (trainer.Age != 0)
-                    {
-                        string filter2 = $"\"Trainer\".\"Age\" = @age";
-                        command.Parameters.AddWithValue("age", trainer.Age);
-                        conditions.Add(filter2);
-                    }
-                    string baseQuery = $"SELECT * FROM \"Trainer\" LEFT JOIN \"Pokemon\" ON \"Trainer\".\"Id\" = \"TrainerId\" WHERE 1=1 ";
-                    if (conditions.Count > 0)
-                    {
-                        baseQuery = baseQuery + "AND ";
-                    }
-                    string conditionsText = String.Join(" AND ", conditions);
-                    command.CommandText = baseQuery + conditionsText;
-                    using (NpgsqlDataReader reader = await command.ExecuteReaderAsync())
-                    {
-                        while (reader.Read())
-                        {
-                            TrainerRead trainerRead = new TrainerRead
-                            {
-                                Id = reader["Id"] != DBNull.Value ? Convert.ToInt32(reader["Id"]) : 0,
-                                Name = reader["Name"] != DBNull.Value ? reader["Name"].ToString() : string.Empty,
-                                Age = reader["Age"] != DBNull.Value ? Convert.ToInt32(reader["Age"]) : 0
-                            };
-
-                            trainers.Add(trainerRead);
-                        }
-                    }
-
-
                 }
             }
             return trainers;
+        }
+
+        private string ApplyFilter(TrainerRead trainer, NpgsqlCommand command)
+        {
+            StringBuilder filter = new StringBuilder();
+            if (trainer.Name != null)
+            {
+                filter.Append($" AND \"Trainer\".\"Name\" = @name");
+                command.Parameters.AddWithValue("name", trainer.Name);
+            }
+            if (trainer.Age != 0)
+            {
+                filter.Append($" AND \"Trainer\".\"Age\" = @type");
+                command.Parameters.AddWithValue("type", trainer.Age);
+            }
+            filter.Insert(0, $"SELECT * FROM \"Trainer\" LEFT JOIN \"Pokemon\" ON \"Trainer\".\"Id\" = \"TrainerId\" WHERE 1=1");
+            return filter.ToString();
         }
 
 

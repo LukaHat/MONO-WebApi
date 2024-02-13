@@ -45,3 +45,6 @@ C:\Users\lukah\mono\MONO-WebApi\Example.Repository.Common\bin\Debug\System.Runti
 C:\Users\lukah\mono\MONO-WebApi\Example.Repository.Common\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\lukah\mono\MONO-WebApi\Example.Repository.Common\bin\Debug\System.Web.Http.xml
 C:\Users\lukah\mono\MONO-WebApi\Example.Repository.Common\bin\Debug\Example.Model.Common.dll.config
+C:\Users\lukah\mono\MONO-WebApi\Example.Repository.Common\bin\Debug\Example.Common.dll
+C:\Users\lukah\mono\MONO-WebApi\Example.Repository.Common\bin\Debug\Example.Common.pdb
+C:\Users\lukah\mono\MONO-WebApi\Example.Repository.Common\bin\Debug\Example.Common.dll.config
