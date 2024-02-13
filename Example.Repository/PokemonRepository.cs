@@ -6,6 +6,7 @@ using System;
 using System.Net;
 using System.Web.Http;
 using System.Threading.Tasks;
+using System.Text;
 
 namespace Example.WebApi.Controllers
 {
@@ -20,93 +21,74 @@ namespace Example.WebApi.Controllers
         {
             List<PokemonRead> pokemons = new List<PokemonRead>();
             NpgsqlConnection connection = new NpgsqlConnection(connectionString);
-
-            if (pokemon == null)
+            using (connection)
             {
-                using (connection)
+                connection.Open();
+                NpgsqlCommand command = new NpgsqlCommand();
+                command.Connection = connection;
+                command.CommandText = Filter(pokemon);
+                using (NpgsqlDataReader reader = await command.ExecuteReaderAsync())
                 {
-                    connection.Open();
-                    NpgsqlCommand command = new NpgsqlCommand();
-                    command.Connection = connection;
-                    command.CommandText = $"SELECT * FROM \"Pokemon\" LEFT JOIN \"Trainer\" ON \"Trainer\".\"Id\" = \"TrainerId\"";
-
-                    using (NpgsqlDataReader reader = await command.ExecuteReaderAsync())
+                    while (reader.Read())
                     {
-                         while (reader.Read())
+                        PokemonRead pokemonRead = new PokemonRead
                         {
-                            PokemonRead pokemonRead = new PokemonRead
-                            {
-                                PokemonId = reader["Id"] != DBNull.Value ? Convert.ToInt32(reader["Id"]) : 0,
-                                TrainerId = reader["TrainerId"] != DBNull.Value ? Convert.ToInt32(reader["TrainerId"]) : 0,
-                                Name = reader["Name"] != DBNull.Value ? reader["Name"].ToString() : string.Empty,
-                                Type = reader["Type"] != DBNull.Value ? reader["Type"].ToString() : string.Empty,
-                                SecondType = reader["SecondType"] != DBNull.Value ? reader["SecondType"].ToString() : string.Empty,
-                            };
-
-                           pokemons.Add(pokemonRead);
-                        }
-                    }
-                }
-            }
-            else
-            {
-                using (connection)
-                {
-                    connection.Open();
-                    NpgsqlCommand command = new NpgsqlCommand();
-                    command.Connection = connection;
-                    List<string> conditions = new List<string>();
-                    if (pokemon.Name != null)
-                    {
-                        string filter1 = $"\"Pokemon\".\"Name\" = @name";
-                        command.Parameters.AddWithValue("name", pokemon.Name);
-                        conditions.Add(filter1);
-                    }
-                    if (pokemon.Type != null)
-                    {
-                        string filter2 = $"\"Pokemon\".\"Type\" = @type";
-                        command.Parameters.AddWithValue("type", pokemon.Type);
-                        conditions.Add(filter2);
-                    }
-                    if (pokemon.SecondType != null)
-                    {
-                        string filter3 = $"\"Pokemon\".\"SecondType\" = @secondType";
-                        command.Parameters.AddWithValue("secondType", pokemon.SecondType);
-                        conditions.Add(filter3);
-                    }
-                    if (pokemon.TrainerId != 0)
-                    {
-                        string filter4 = $"\"Pokemon\".\"TrainerId\" = @trainerId";
-                        command.Parameters.AddWithValue("trainerId", pokemon.TrainerId);
-                        conditions.Add(filter4);
-                    }
-                    string baseQuery = $"SELECT * FROM \"Pokemon\" LEFT JOIN \"Trainer\" ON \"Trainer\".\"Id\" = \"TrainerId\" WHERE 1=1 ";
-                    if (conditions.Count > 0)
-                    {
-                        baseQuery = baseQuery + "AND ";
-                    }
-                    string conditionsText = String.Join(" AND ", conditions);
-                    command.CommandText = baseQuery + conditionsText;
-                    using (NpgsqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            PokemonRead pokemonRead = new PokemonRead
-                            {
-                                PokemonId = reader["Id"] != DBNull.Value ? Convert.ToInt32(reader["Id"]) : 0,
-                                TrainerId = reader["TrainerId"] != DBNull.Value ? Convert.ToInt32(reader["TrainerId"]) : 0,
-                                Name = reader["Name"] != DBNull.Value ? reader["Name"].ToString() : string.Empty,
-                                Type = reader["Type"] != DBNull.Value ? reader["Type"].ToString() : string.Empty,
-                                SecondType = reader["SecondType"] != DBNull.Value ? reader["SecondType"].ToString() : string.Empty,
-                            };
-
-                            pokemons.Add(pokemonRead);
-                        }
+                            PokemonId = reader["Id"] != DBNull.Value ? Convert.ToInt32(reader["Id"]) : 0,
+                            TrainerId = reader["TrainerId"] != DBNull.Value ? Convert.ToInt32(reader["TrainerId"]) : 0,
+                            Name = reader["Name"] != DBNull.Value ? reader["Name"].ToString() : string.Empty,
+                            Type = reader["Type"] != DBNull.Value ? reader["Type"].ToString() : string.Empty,
+                            SecondType = reader["SecondType"] != DBNull.Value ? reader["SecondType"].ToString() : string.Empty,
+                        };
+                        pokemons.Add(pokemonRead);
                     }
                 }
             }
             return pokemons;
         }
+
+
+        private string Filter(PokemonRead pokemon)
+        {
+            StringBuilder filter = new StringBuilder();
+            if(pokemon.Name != null)
+            {
+                filter.Append($"\"Pokemon\".\"Name\" = '{pokemon.Name}'");
+            }
+            if(pokemon.Type != null)
+            {
+                if (filter.Length > 0)
+                {
+                    filter.Append(" AND ");
+                }
+                filter.Append($"\"Pokemon\".\"Type\" = '{pokemon.Type}'");
+            }
+            if(pokemon.SecondType != null)
+            {
+
+                if (filter.Length > 0)
+                {
+                    filter.Append(" AND ");
+                }
+                filter.Append($"\"Pokemon\".\"SecondType\" = '{pokemon.SecondType}'");
+            }
+            if(pokemon.TrainerId != 0)
+            {
+
+                if (filter.Length > 0)
+                {
+                    filter.Append(" AND ");
+                }
+                filter.Append($"\"Pokemon\".\"TrainerId\" = '{pokemon.TrainerId}'");
+            }
+            if(filter.Length > 0)
+            {
+                filter.Insert(0, " AND ");
+            }
+            filter.Insert(0, $"SELECT * FROM \"Pokemon\" LEFT JOIN \"Trainer\" ON \"Trainer\".\"Id\" = \"TrainerId\" WHERE 1=1");
+            return filter.ToString();
+        }
+
+
 
         public async Task<Pokemon> GetPokemonByIdAsync(int id)
         {
@@ -137,39 +119,6 @@ namespace Example.WebApi.Controllers
             return (pokemon);
         }
 
-
-        private async Task<bool> PokemonExistsAsync(int id)
-        {
-            Pokemon pokemon = null;
-            NpgsqlConnection connection = new NpgsqlConnection(connectionString);
-
-            using (connection)
-            {
-                NpgsqlCommand command = new NpgsqlCommand();
-                command.CommandText = $"SELECT * FROM \"Pokemon\" WHERE \"Id\" = @id";
-                command.Connection = connection;
-                command.Parameters.AddWithValue("id", id);
-                connection.Open();
-                NpgsqlDataReader reader = await command.ExecuteReaderAsync();
-                if (reader.HasRows)
-                {
-                    reader.Read();
-                    pokemon = new Pokemon(
-                    (int)reader["Id"],
-                    (int)reader["TrainerId"],
-                    (string)reader["Name"],
-                    (string)reader["Type"],
-                    (string)reader["SecondType"]
-                );
-                }
-                connection.Close();
-            }
-            if (pokemon == null)
-            {
-                return false;
-            }
-            return true;
-        }
 
         private async Task<Pokemon> FetchPokemonAsync(int id)
         {
@@ -237,7 +186,7 @@ namespace Example.WebApi.Controllers
             {
                 return ("");
             }
-            else if (await PokemonExistsAsync(id) == false)
+            else if (await FetchPokemonAsync(id) == null)
             {
                 return ("Pokemon not found");
             }
@@ -308,9 +257,9 @@ namespace Example.WebApi.Controllers
         {
             if (id == 0)
             {
-                return ("Pokemon under that it does not exist");
+                return ("Bad ID provided");
             }
-            else if (await PokemonExistsAsync(id) == false)
+            else if (await FetchPokemonAsync(id) == null)
             {
                 return ("Pokemon not found");
             }

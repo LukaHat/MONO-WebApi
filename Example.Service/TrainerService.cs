@@ -17,29 +17,39 @@ namespace Example.Service
             this.trainerRepository = trainerRepository;
         }
 
-        public Task<List<TrainerRead>> GetAllTrainersAsync(TrainerRead trainer)
+        public async Task<List<TrainerRead>> GetAllTrainersAsync(TrainerRead trainer)
         {
-            return trainerRepository.GetAsync(trainer);
+            Task<List<TrainerRead>> result = trainerRepository.GetAsync(trainer);
+            await result;
+            return result.Result;
         }
 
-        public Task<Trainer> GetTrainerByIdAsync(int id)
+        public async Task<Trainer> GetTrainerByIdAsync(int id)
         {
-            return trainerRepository.GetTrainerByIdAsync(id);
+            Task<Trainer> result =  trainerRepository.GetTrainerByIdAsync(id);
+            await result;
+            return result.Result;
         }
 
-        public Task<string> AddNewTrainerAsync(TrainerCreate newTrainer)
+        public async Task<string> AddNewTrainerAsync(TrainerCreate newTrainer)
         {
-            return trainerRepository.PostAsync(newTrainer);
+            Task<string> result = trainerRepository.PostAsync(newTrainer);
+            await result;
+            return result.Result;
         }
 
-        public Task<string> UpdateTrainerAsync(int id, TrainerUpdate updatedTrainer)
+        public async Task<string> UpdateTrainerAsync(int id, TrainerUpdate updatedTrainer)
         {
-            return trainerRepository.PutAsync(id, updatedTrainer);
+            Task<string> result = trainerRepository.PutAsync(id, updatedTrainer);
+            await result;
+            return result.Result;
         }
 
-        public Task<string> DeleteTrainerAsync(int id)
+        public async Task<string> DeleteTrainerAsync(int id)
         {
-            return trainerRepository.DeleteAsync(id);
+            Task<string> result = trainerRepository.DeleteAsync(id);
+            await result;
+            return result.Result;
         }
     }
 }

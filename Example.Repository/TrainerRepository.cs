@@ -121,36 +121,6 @@ namespace Example.WebApi.Controllers
         }
 
 
-        private async Task<bool> TrainerExistsAsync(int id)
-        {
-            Trainer trainer = null;
-            NpgsqlConnection connection = new NpgsqlConnection(connectionString);
-
-            using (connection)
-            {
-                NpgsqlCommand command = new NpgsqlCommand();
-                command.CommandText = $"SELECT * FROM \"Trainer\" WHERE \"Id\" = @id";
-                command.Connection = connection;
-                command.Parameters.AddWithValue("id", id);
-                connection.Open();
-                NpgsqlDataReader reader = await command.ExecuteReaderAsync();
-                if (reader.HasRows)
-                {
-                    reader.Read();
-                    trainer = new Trainer(
-                    (int)reader["Id"],
-                    (string)reader["Name"],
-                    (int)reader["Age"]
-                );
-                }
-                connection.Close();
-            }
-            if (trainer == null)
-            {
-                return false;
-            }
-            return true;
-        }
 
         private async Task<Trainer> FetchTrainerAsync(int id)
         {
@@ -216,7 +186,7 @@ namespace Example.WebApi.Controllers
             {
                 return ("Invalid data in request body");
             }
-            else if (await TrainerExistsAsync(id) == false)
+            else if (await FetchTrainerAsync(id) == null)
             {
                 return ("Trainer not found");
             }
@@ -278,7 +248,7 @@ namespace Example.WebApi.Controllers
             {
                 return ("Invalid id");
             }
-            else if (await TrainerExistsAsync(id) == false)
+            else if (await FetchTrainerAsync(id) == null)
             {
                 return ("Trainer not found");
             }

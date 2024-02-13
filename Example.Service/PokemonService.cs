@@ -17,29 +17,39 @@ namespace Example.Service
             this.pokemonRepository = pokemonRepository;
         }
 
-        public Task<List<PokemonRead>> GetAllPokemonsAsync(PokemonRead pokemon)
+        public async Task<List<PokemonRead>> GetAllPokemonsAsync(PokemonRead pokemon)
         {
-            return pokemonRepository.GetAsync(pokemon);
+            Task<List<PokemonRead>> result = pokemonRepository.GetAsync(pokemon);
+            await result;
+            return result.Result;
         }
 
-        public Task<Pokemon> GetPokemonByIdAsync(int id)
+        public async Task<Pokemon> GetPokemonByIdAsync(int id)
         {
-            return pokemonRepository.GetPokemonByIdAsync(id);
+            Task<Pokemon> result =  pokemonRepository.GetPokemonByIdAsync(id);
+            await result;
+            return result.Result;
         }
 
-        public Task<string> AddNewPokemonAsync(PokemonCreate newPokemon)
+        public async Task<string> AddNewPokemonAsync(PokemonCreate newPokemon)
         {
-            return pokemonRepository.PostAsync(newPokemon);
+            Task<string> result =  pokemonRepository.PostAsync(newPokemon);
+            await result;
+            return result.Result;
         }
 
-        public Task<string> UpdatePokemonAsync(int id, PokemonUpdate updatedPokemon)
+        public async Task<string> UpdatePokemonAsync(int id, PokemonUpdate updatedPokemon)
         {
-            return pokemonRepository.PutAsync(id, updatedPokemon);
+            Task<string> result = pokemonRepository.PutAsync(id, updatedPokemon);
+            await result;
+            return result.Result;
         }
 
-        public Task<string> DeletePokemonAsync(int id)
+        public async Task<string> DeletePokemonAsync(int id)
         {
-            return pokemonRepository.DeleteAsync(id);
+            Task<string> result =  pokemonRepository.DeleteAsync(id);
+            await result;
+            return result.Result;
         }
     }
 }
