@@ -105,8 +105,6 @@ namespace Example.WebApi.Controllers
         }
 
 
-
-
         public async Task<Pokemon> GetPokemonByIdAsync(int id)
         {
             Pokemon pokemon = null;
