@@ -98,12 +98,11 @@ namespace Example.WebApi.Controllers
             if (sorting.SortOrder != "ASC")
             {
                 sort.Append(sorting.SortOrder);
+
             }
             return sort.ToString();
             
         }
-
-
 
 
         public async Task<Pokemon> GetPokemonByIdAsync(int id)
