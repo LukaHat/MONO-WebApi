@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Text;
 using System.Diagnostics.Eventing.Reader;
 using Example.Common;
+using System.Data;
 
 namespace Example.WebApi.Controllers
 {
@@ -17,62 +18,79 @@ namespace Example.WebApi.Controllers
 
         private const string connectionString = "Server = 127.0.0.1;Port=5432;Database=postgres;User Id = postgres;Password=2001;";
 
-        [HttpGet]
         public async Task<List<PokemonRead>> GetAsync(PokemonFilter filter, Paging paging, Sorting sorting)
         {
             List<PokemonRead> pokemons = new List<PokemonRead>();
             NpgsqlConnection connection = new NpgsqlConnection(connectionString);
-            using (connection)
+
+            try
             {
-                connection.Open();
-                NpgsqlCommand command = new NpgsqlCommand();
-                command.Connection = connection;
-                command.CommandText = ApplyFilter(filter, command);
-                command.CommandText += ApplySorting(sorting, command);
-                command.CommandText  += ApplyPaging(paging, command);
-                using (NpgsqlDataReader reader = await command.ExecuteReaderAsync())
+                await connection.OpenAsync();
+
+                using (NpgsqlCommand command = new NpgsqlCommand())
                 {
-                    while (reader.Read())
+                    command.Connection = connection;
+                    StringBuilder commandTxt = new StringBuilder();
+                    commandTxt.Append(ApplyFilter(filter, command));
+                   commandTxt.Append(ApplySorting(sorting, command));
+                   commandTxt.Append(ApplyPaging(paging, command));
+                    command.CommandText = commandTxt.ToString();
+
+                    using (NpgsqlDataReader reader = await command.ExecuteReaderAsync())
                     {
-                        PokemonRead pokemonRead = new PokemonRead
+                        while (await reader.ReadAsync())
                         {
-                            PokemonId = reader["Id"] != DBNull.Value ? Convert.ToInt32(reader["Id"]) : 0,
-                            TrainerId = reader["TrainerId"] != DBNull.Value ? Convert.ToInt32(reader["TrainerId"]) : 0,
-                            Name = reader["Name"] != DBNull.Value ? reader["Name"].ToString() : string.Empty,
-                            Type = reader["Type"] != DBNull.Value ? reader["Type"].ToString() : string.Empty,
-                            SecondType = reader["SecondType"] != DBNull.Value ? reader["SecondType"].ToString() : string.Empty,
-                        };
-                        pokemons.Add(pokemonRead);
+                            PokemonRead pokemonRead = new PokemonRead
+                            {
+                                PokemonId = reader.IsDBNull(reader.GetOrdinal("Id")) ? 0 : reader.GetInt32(reader.GetOrdinal("Id")),
+                                Name = reader.IsDBNull(reader.GetOrdinal("Name")) ? string.Empty : reader.GetString(reader.GetOrdinal("Name")),
+                                Type = reader.IsDBNull(reader.GetOrdinal("Type")) ? string.Empty : reader.GetString(reader.GetOrdinal("Type")),
+                                SecondType = reader.IsDBNull(reader.GetOrdinal("SecondType")) ? string.Empty : reader.GetString(reader.GetOrdinal("SecondType")),
+                            };
+                            pokemons.Add(pokemonRead);
+                        }
                     }
                 }
             }
-            return pokemons;
+            catch (Exception ex)
+            {
+                // Log or handle the exception appropriately
+                Console.WriteLine($"Error in GetAsync: {ex.Message}");
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
 
+            return pokemons;
         }
 
         private string ApplyFilter(PokemonFilter pokemonFilter, NpgsqlCommand command)
         {
             StringBuilder filter = new StringBuilder();
-            filter.Append($"SELECT * FROM \"Pokemon\" LEFT JOIN \"Trainer\" ON \"Trainer\".\"Id\" = \"TrainerId\" WHERE 1=1");
+            filter.Append($"SELECT * FROM \"PokemonNew\" WHERE 1=1");
             if (pokemonFilter.NameQuery != "")
             {
-                filter.Append(" AND \"Pokemon\".\"Name\" LIKE @nameQuery");
+                filter.Append(" AND \"PokemonNew\".\"Name\" LIKE @nameQuery");
                 command.Parameters.AddWithValue("@nameQuery", $"%{pokemonFilter.NameQuery}%");
             }
             if(pokemonFilter.TypeQuery != "")
             {
-                filter.Append(" AND \"Pokemon\".\"Type\" LIKE @typeQuery");
+                filter.Append(" AND \"PokemonNew\".\"Type\" LIKE @typeQuery");
                 command.Parameters.AddWithValue("@typeQuery", $"%{pokemonFilter.TypeQuery}%");
             }
             if(pokemonFilter.TrainerId != 0)
             {
-                filter.Append(" AND \"Pokemon\".\"TrainerId\" = @trainerId");
+                filter.Append(" AND \"PokemonNew\".\"TrainerId\" = @trainerId");
                 command.Parameters.AddWithValue("@trainerId", pokemonFilter.TrainerId);
             }
             if(pokemonFilter.SecondTypeQuery != "")
             {
-                filter.Append(" AND \"Pokemon\".\"SecondType\" = @secondType");
-                command.Parameters.AddWithValue("secondType", $"%{pokemonFilter.SecondTypeQuery}%");
+                filter.Append(" AND \"PokemonNew\".\"SecondType\" = @secondType");
+                command.Parameters.AddWithValue("@secondType", $"%{pokemonFilter.SecondTypeQuery}%");
             }
             return filter.ToString();
         }
@@ -83,26 +101,21 @@ namespace Example.WebApi.Controllers
             if (paging.PageNum > 0)
             {
                 page.Append(" OFFSET @offset");
-                command.Parameters.AddWithValue("@offset", paging.PageNum * paging.PageSize);
+                command.Parameters.AddWithValue("@offset", (paging.PageNum - 1) * paging.PageSize);
             }
             return page.ToString();
         }
 
         private string ApplySorting(Sorting sorting, NpgsqlCommand command)
         {
-            StringBuilder sort = new StringBuilder();
-            if (sorting.SortBy != "TrainerId")
-            {
-                sort.Append(" ORDER BY " + sorting.SortBy);
-            }
-            if (sorting.SortOrder != "ASC")
-            {
-                sort.Append(sorting.SortOrder);
-
-            }
-            return sort.ToString();
-            
+            StringBuilder commandText = new StringBuilder(command.CommandText);
+            commandText.Append(" ORDER BY \"");
+            commandText.Append(sorting.SortBy).Append("\" ");
+            commandText.Append(sorting.SortOrder == "ASC" ? "ASC" : "DESC");
+            return commandText.ToString();
         }
+
+
 
 
         public async Task<Pokemon> GetPokemonByIdAsync(int id)
@@ -113,7 +126,7 @@ namespace Example.WebApi.Controllers
             using (connection)
             {
                 NpgsqlCommand command = new NpgsqlCommand();
-                command.CommandText = $"SELECT * FROM \"Pokemon\" WHERE \"Id\" = @id";
+                command.CommandText = $"SELECT * FROM \"PokemonNew\" WHERE \"Id\" = @id";
                 command.Connection = connection;
                 command.Parameters.AddWithValue("id", id);
                 connection.Open();
@@ -123,7 +136,6 @@ namespace Example.WebApi.Controllers
                     reader.Read();
                     pokemon = new Pokemon(
                     (int)reader["Id"],
-                    (int)reader["TrainerId"],
                     (string)reader["Name"],
                     (string)reader["Type"],
                     (string)reader["SecondType"]
@@ -143,7 +155,7 @@ namespace Example.WebApi.Controllers
             using (connection)
             {
                 NpgsqlCommand command = new NpgsqlCommand();
-                command.CommandText = $"SELECT * FROM \"Pokemon\" WHERE \"Id\" = @id";
+                command.CommandText = $"SELECT * FROM \"PokemonNew\" WHERE \"Id\" = @id";
                 command.Connection = connection;
                 command.Parameters.AddWithValue("id", id);
                 connection.Open();
@@ -151,13 +163,13 @@ namespace Example.WebApi.Controllers
                 if (reader.HasRows)
                 {
                     reader.Read();
-                    pokemon = new Pokemon(
-                    (int)reader["Id"],
-                    (int)reader["TrainerId"],
-                    (string)reader["Name"],
-                    (string)reader["Type"],
-                    (string)reader["SecondType"]
-                );
+                    pokemon = new Pokemon
+                    {
+                        PokemonId = reader.IsDBNull(reader.GetOrdinal("Id")) ? 0 : reader.GetInt32(reader.GetOrdinal("Id")),
+                        Name = reader.IsDBNull(reader.GetOrdinal("Name")) ? string.Empty : reader.GetString(reader.GetOrdinal("Name")),
+                        Type = reader.IsDBNull(reader.GetOrdinal("Type")) ? string.Empty : reader.GetString(reader.GetOrdinal("Type")),
+                        SecondType = reader.IsDBNull(reader.GetOrdinal("SecondType")) ? string.Empty : reader.GetString(reader.GetOrdinal("SecondType"))
+                    };
                 }
                 connection.Close();
             }
@@ -173,11 +185,10 @@ namespace Example.WebApi.Controllers
 
             using (connection)
             {
-                string insert = $"INSERT INTO \"Pokemon\" (\"Id\",\"TrainerId\",\"Name\",\"Type\",\"SecondType\") VALUES (@id,@trainerId,@name,@type,@secondType)";
+                string insert = $"INSERT INTO \"PokemonNew\" (\"Id\",\"Name\",\"Type\",\"SecondType\") VALUES (@id,@name,@type,@secondType)";
                 NpgsqlCommand command = new NpgsqlCommand(insert, connection);
                 connection.Open();
                 command.Parameters.AddWithValue("id", newPokemon.PokemonId);
-                command.Parameters.AddWithValue("trainerId", newPokemon.TrainerId);
                 command.Parameters.AddWithValue("name", newPokemon.Name);
                 command.Parameters.AddWithValue("type", newPokemon.Type);
                 command.Parameters.AddWithValue("secondType", newPokemon.SecondType);
@@ -211,13 +222,7 @@ namespace Example.WebApi.Controllers
                 Pokemon pokemonToUpdate = await FetchPokemonAsync(id);
                 List<string> conditions = new List<string>();
                 NpgsqlCommand command = new NpgsqlCommand();
-                string baseQuery = $"UPDATE \"Pokemon\" SET ";
-                if (updatedPokemon.TrainerId != pokemonToUpdate.TrainerId)
-                {
-                    string condition1 = $"\"TrainerId\"=@trainerId";
-                    command.Parameters.AddWithValue("trainerId", updatedPokemon.TrainerId);
-                    conditions.Add(condition1);
-                }
+                string baseQuery = $"UPDATE \"PokemonNew\" SET ";
                 if (updatedPokemon.Name != pokemonToUpdate.Name)
                 {
                     string condition2 = $"\"Name\"=@name";
@@ -282,7 +287,7 @@ namespace Example.WebApi.Controllers
             {
                 NpgsqlCommand command = new NpgsqlCommand();
                 NpgsqlConnection connection = new NpgsqlConnection(connectionString);
-                command.CommandText = $"DELETE FROM \"Pokemon\" WHERE \"Id\"=(@id)";
+                command.CommandText = $"DELETE FROM \"PokemonNew\" WHERE \"Id\"=(@id)";
                 command.Parameters.AddWithValue("id", id);
                 command.Connection = connection;
                 int numberOfAffectedRows;

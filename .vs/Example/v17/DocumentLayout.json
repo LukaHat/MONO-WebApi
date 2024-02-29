@@ -1,0 +1,359 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\lukah\\Documents\\Mono\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E5B2E5F7-6497-40A9-8568-D2B42DCF05C5}|Example.WebApi\\Example.WebApi.csproj|C:\\Users\\lukah\\Documents\\Mono\\example.webapi\\app_start\\webapiconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E5B2E5F7-6497-40A9-8568-D2B42DCF05C5}|Example.WebApi\\Example.WebApi.csproj|solutionrelative:example.webapi\\app_start\\webapiconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5B2E5F7-6497-40A9-8568-D2B42DCF05C5}|Example.WebApi\\Example.WebApi.csproj|c:\\users\\lukah\\documents\\mono\\example.webapi\\controllers\\pokemoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E5B2E5F7-6497-40A9-8568-D2B42DCF05C5}|Example.WebApi\\Example.WebApi.csproj|solutionrelative:example.webapi\\controllers\\pokemoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76000EAD-A35E-42B2-B720-2BF2CE5716AE}|Example.Common\\Example.Common.csproj|C:\\Users\\lukah\\Documents\\Mono\\example.common\\sorting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76000EAD-A35E-42B2-B720-2BF2CE5716AE}|Example.Common\\Example.Common.csproj|solutionrelative:example.common\\sorting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{41830F24-2A7E-4C44-A4AE-70EEEDB310A2}|Example.Repository\\Example.Repository.csproj|C:\\Users\\lukah\\Documents\\Mono\\example.repository\\pokemonrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{41830F24-2A7E-4C44-A4AE-70EEEDB310A2}|Example.Repository\\Example.Repository.csproj|solutionrelative:example.repository\\pokemonrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3F7D9F37-C09E-450C-B895-C668D4F47184}|Example.Model\\Example.Model.csproj|C:\\Users\\lukah\\Documents\\Mono\\example.model\\pokemon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3F7D9F37-C09E-450C-B895-C668D4F47184}|Example.Model\\Example.Model.csproj|solutionrelative:example.model\\pokemon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3F7D9F37-C09E-450C-B895-C668D4F47184}|Example.Model\\Example.Model.csproj|C:\\Users\\lukah\\Documents\\Mono\\example.model\\pokemonread.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3F7D9F37-C09E-450C-B895-C668D4F47184}|Example.Model\\Example.Model.csproj|solutionrelative:example.model\\pokemonread.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EF3947F5-3AC5-4413-9AA5-51D526A10C12}|Example.Service\\Example.Service.csproj|C:\\Users\\lukah\\Documents\\Mono\\example.service\\pokemonservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF3947F5-3AC5-4413-9AA5-51D526A10C12}|Example.Service\\Example.Service.csproj|solutionrelative:example.service\\pokemonservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76000EAD-A35E-42B2-B720-2BF2CE5716AE}|Example.Common\\Example.Common.csproj|C:\\Users\\lukah\\Documents\\Mono\\example.common\\paging.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76000EAD-A35E-42B2-B720-2BF2CE5716AE}|Example.Common\\Example.Common.csproj|solutionrelative:example.common\\paging.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76000EAD-A35E-42B2-B720-2BF2CE5716AE}|Example.Common\\Example.Common.csproj|C:\\Users\\lukah\\Documents\\Mono\\example.common\\pokemonfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76000EAD-A35E-42B2-B720-2BF2CE5716AE}|Example.Common\\Example.Common.csproj|solutionrelative:example.common\\pokemonfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F9C8C2CC-29B8-4D71-ABB3-8BB41698D30B}|Example.Model.Common\\Example.Model.Common.csproj|C:\\Users\\lukah\\Documents\\Mono\\example.model.common\\ipokemon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F9C8C2CC-29B8-4D71-ABB3-8BB41698D30B}|Example.Model.Common\\Example.Model.Common.csproj|solutionrelative:example.model.common\\ipokemon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{41830F24-2A7E-4C44-A4AE-70EEEDB310A2}|Example.Repository\\Example.Repository.csproj|C:\\Users\\lukah\\Documents\\Mono\\example.repository\\trainerrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{41830F24-2A7E-4C44-A4AE-70EEEDB310A2}|Example.Repository\\Example.Repository.csproj|solutionrelative:example.repository\\trainerrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{76000EAD-A35E-42B2-B720-2BF2CE5716AE}|Example.Common\\Example.Common.csproj|C:\\Users\\lukah\\Documents\\Mono\\example.common\\trainerfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{76000EAD-A35E-42B2-B720-2BF2CE5716AE}|Example.Common\\Example.Common.csproj|solutionrelative:example.common\\trainerfilter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5B2E5F7-6497-40A9-8568-D2B42DCF05C5}|Example.WebApi\\Example.WebApi.csproj|C:\\Users\\lukah\\Documents\\Mono\\example.webapi\\global.asax.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E5B2E5F7-6497-40A9-8568-D2B42DCF05C5}|Example.WebApi\\Example.WebApi.csproj|solutionrelative:example.webapi\\global.asax.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5B2E5F7-6497-40A9-8568-D2B42DCF05C5}|Example.WebApi\\Example.WebApi.csproj|C:\\Users\\lukah\\Documents\\Mono\\example.webapi\\app_start\\diconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E5B2E5F7-6497-40A9-8568-D2B42DCF05C5}|Example.WebApi\\Example.WebApi.csproj|solutionrelative:example.webapi\\app_start\\diconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5B2E5F7-6497-40A9-8568-D2B42DCF05C5}|Example.WebApi\\Example.WebApi.csproj|C:\\Users\\lukah\\Documents\\Mono\\example.webapi\\packages.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{E5B2E5F7-6497-40A9-8568-D2B42DCF05C5}|Example.WebApi\\Example.WebApi.csproj|solutionrelative:example.webapi\\packages.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5B2E5F7-6497-40A9-8568-D2B42DCF05C5}|Example.WebApi\\Example.WebApi.csproj|C:\\Users\\lukah\\Documents\\Mono\\example.webapi\\app_start\\bundleconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E5B2E5F7-6497-40A9-8568-D2B42DCF05C5}|Example.WebApi\\Example.WebApi.csproj|solutionrelative:example.webapi\\app_start\\bundleconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5B2E5F7-6497-40A9-8568-D2B42DCF05C5}|Example.WebApi\\Example.WebApi.csproj|C:\\Users\\lukah\\Documents\\Mono\\example.webapi\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E5B2E5F7-6497-40A9-8568-D2B42DCF05C5}|Example.WebApi\\Example.WebApi.csproj|solutionrelative:example.webapi\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5B2E5F7-6497-40A9-8568-D2B42DCF05C5}|Example.WebApi\\Example.WebApi.csproj|C:\\Users\\lukah\\Documents\\Mono\\example.webapi\\app_start\\routeconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E5B2E5F7-6497-40A9-8568-D2B42DCF05C5}|Example.WebApi\\Example.WebApi.csproj|solutionrelative:example.webapi\\app_start\\routeconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5B2E5F7-6497-40A9-8568-D2B42DCF05C5}|Example.WebApi\\Example.WebApi.csproj|C:\\Users\\lukah\\Documents\\Mono\\example.webapi\\app_start\\filterconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E5B2E5F7-6497-40A9-8568-D2B42DCF05C5}|Example.WebApi\\Example.WebApi.csproj|solutionrelative:example.webapi\\app_start\\filterconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5B2E5F7-6497-40A9-8568-D2B42DCF05C5}|Example.WebApi\\Example.WebApi.csproj|C:\\Users\\lukah\\Documents\\Mono\\example.webapi\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{E5B2E5F7-6497-40A9-8568-D2B42DCF05C5}|Example.WebApi\\Example.WebApi.csproj|solutionrelative:example.webapi\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EF3947F5-3AC5-4413-9AA5-51D526A10C12}|Example.Service\\Example.Service.csproj|C:\\Users\\lukah\\Documents\\Mono\\example.service\\trainerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF3947F5-3AC5-4413-9AA5-51D526A10C12}|Example.Service\\Example.Service.csproj|solutionrelative:example.service\\trainerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Sorting.cs",
+              "DocumentMoniker": "C:\\Users\\lukah\\Documents\\Mono\\Example.Common\\Sorting.cs",
+              "RelativeDocumentMoniker": "Example.Common\\Sorting.cs",
+              "ToolTip": "C:\\Users\\lukah\\Documents\\Mono\\Example.Common\\Sorting.cs",
+              "RelativeToolTip": "Example.Common\\Sorting.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-29T07:19:50.859Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PokemonRepository.cs",
+              "DocumentMoniker": "C:\\Users\\lukah\\Documents\\Mono\\Example.Repository\\PokemonRepository.cs",
+              "RelativeDocumentMoniker": "Example.Repository\\PokemonRepository.cs",
+              "ToolTip": "C:\\Users\\lukah\\Documents\\Mono\\Example.Repository\\PokemonRepository.cs",
+              "RelativeToolTip": "Example.Repository\\PokemonRepository.cs",
+              "ViewState": "AQIAABQAAAAAAAAAAAAWwDEAAAAcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-14T08:01:23.045Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "DIConfig.cs",
+              "DocumentMoniker": "C:\\Users\\lukah\\Documents\\Mono\\Example.WebApi\\App_Start\\DIConfig.cs",
+              "RelativeDocumentMoniker": "Example.WebApi\\App_Start\\DIConfig.cs",
+              "ToolTip": "C:\\Users\\lukah\\Documents\\Mono\\Example.WebApi\\App_Start\\DIConfig.cs",
+              "RelativeToolTip": "Example.WebApi\\App_Start\\DIConfig.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAA/AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-16T13:44:01.723Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PokemonController.cs",
+              "DocumentMoniker": "C:\\Users\\lukah\\Documents\\Mono\\Example.WebApi\\Controllers\\PokemonController.cs",
+              "RelativeDocumentMoniker": "Example.WebApi\\Controllers\\PokemonController.cs",
+              "ToolTip": "C:\\Users\\lukah\\Documents\\Mono\\Example.WebApi\\Controllers\\PokemonController.cs",
+              "RelativeToolTip": "Example.WebApi\\Controllers\\PokemonController.cs",
+              "ViewState": "AQIAAA4AAAAAAAAAAAAwwFwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-14T08:01:22.567Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "WebApiConfig.cs",
+              "DocumentMoniker": "C:\\Users\\lukah\\Documents\\Mono\\Example.WebApi\\App_Start\\WebApiConfig.cs",
+              "RelativeDocumentMoniker": "Example.WebApi\\App_Start\\WebApiConfig.cs",
+              "ToolTip": "C:\\Users\\lukah\\Documents\\Mono\\Example.WebApi\\App_Start\\WebApiConfig.cs",
+              "RelativeToolTip": "Example.WebApi\\App_Start\\WebApiConfig.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAxAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-27T13:06:32.478Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PokemonService.cs",
+              "DocumentMoniker": "C:\\Users\\lukah\\Documents\\Mono\\Example.Service\\PokemonService.cs",
+              "RelativeDocumentMoniker": "Example.Service\\PokemonService.cs",
+              "ToolTip": "C:\\Users\\lukah\\Documents\\Mono\\Example.Service\\PokemonService.cs",
+              "RelativeToolTip": "Example.Service\\PokemonService.cs",
+              "ViewState": "AQIAACEAAAAAAAAAAAAcwEUAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-14T08:01:22.565Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Paging.cs",
+              "DocumentMoniker": "C:\\Users\\lukah\\Documents\\Mono\\Example.Common\\Paging.cs",
+              "RelativeDocumentMoniker": "Example.Common\\Paging.cs",
+              "ToolTip": "C:\\Users\\lukah\\Documents\\Mono\\Example.Common\\Paging.cs",
+              "RelativeToolTip": "Example.Common\\Paging.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-14T08:01:22.561Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Pokemon.cs",
+              "DocumentMoniker": "C:\\Users\\lukah\\Documents\\Mono\\Example.Model\\Pokemon.cs",
+              "RelativeDocumentMoniker": "Example.Model\\Pokemon.cs",
+              "ToolTip": "C:\\Users\\lukah\\Documents\\Mono\\Example.Model\\Pokemon.cs",
+              "RelativeToolTip": "Example.Model\\Pokemon.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-28T07:29:40.564Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "PokemonRead.cs",
+              "DocumentMoniker": "C:\\Users\\lukah\\Documents\\Mono\\Example.Model\\PokemonRead.cs",
+              "RelativeDocumentMoniker": "Example.Model\\PokemonRead.cs",
+              "ToolTip": "C:\\Users\\lukah\\Documents\\Mono\\Example.Model\\PokemonRead.cs",
+              "RelativeToolTip": "Example.Model\\PokemonRead.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-28T07:48:42.674Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "TrainerService.cs",
+              "DocumentMoniker": "C:\\Users\\lukah\\Documents\\Mono\\Example.Service\\TrainerService.cs",
+              "RelativeDocumentMoniker": "Example.Service\\TrainerService.cs",
+              "ToolTip": "C:\\Users\\lukah\\Documents\\Mono\\Example.Service\\TrainerService.cs",
+              "RelativeToolTip": "Example.Service\\TrainerService.cs",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAIwBgAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-14T08:15:17.221Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "PokemonFilter.cs",
+              "DocumentMoniker": "C:\\Users\\lukah\\Documents\\Mono\\Example.Common\\PokemonFilter.cs",
+              "RelativeDocumentMoniker": "Example.Common\\PokemonFilter.cs",
+              "ToolTip": "C:\\Users\\lukah\\Documents\\Mono\\Example.Common\\PokemonFilter.cs",
+              "RelativeToolTip": "Example.Common\\PokemonFilter.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-16T12:01:19.325Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "IPokemon.cs",
+              "DocumentMoniker": "C:\\Users\\lukah\\Documents\\Mono\\Example.Model.Common\\IPokemon.cs",
+              "RelativeDocumentMoniker": "Example.Model.Common\\IPokemon.cs",
+              "ToolTip": "C:\\Users\\lukah\\Documents\\Mono\\Example.Model.Common\\IPokemon.cs",
+              "RelativeToolTip": "Example.Model.Common\\IPokemon.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-28T07:29:52.846Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "TrainerRepository.cs",
+              "DocumentMoniker": "C:\\Users\\lukah\\Documents\\Mono\\Example.Repository\\TrainerRepository.cs",
+              "RelativeDocumentMoniker": "Example.Repository\\TrainerRepository.cs",
+              "ToolTip": "C:\\Users\\lukah\\Documents\\Mono\\Example.Repository\\TrainerRepository.cs",
+              "RelativeToolTip": "Example.Repository\\TrainerRepository.cs",
+              "ViewState": "AQIAAM4AAAAAAAAAAAAswAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-14T08:01:22.399Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Global.asax.cs",
+              "DocumentMoniker": "C:\\Users\\lukah\\Documents\\Mono\\Example.WebApi\\Global.asax.cs",
+              "RelativeDocumentMoniker": "Example.WebApi\\Global.asax.cs",
+              "ToolTip": "C:\\Users\\lukah\\Documents\\Mono\\Example.WebApi\\Global.asax.cs",
+              "RelativeToolTip": "Example.WebApi\\Global.asax.cs",
+              "ViewState": "AQIAAA4AAAAAAAAAAADwvxgAAAA9AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-16T11:59:21.141Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "TrainerFilter.cs",
+              "DocumentMoniker": "C:\\Users\\lukah\\Documents\\Mono\\Example.Common\\TrainerFilter.cs",
+              "RelativeDocumentMoniker": "Example.Common\\TrainerFilter.cs",
+              "ToolTip": "C:\\Users\\lukah\\Documents\\Mono\\Example.Common\\TrainerFilter.cs",
+              "RelativeToolTip": "Example.Common\\TrainerFilter.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-27T14:22:06.846Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "BundleConfig.cs",
+              "DocumentMoniker": "C:\\Users\\lukah\\Documents\\Mono\\Example.WebApi\\App_Start\\BundleConfig.cs",
+              "RelativeDocumentMoniker": "Example.WebApi\\App_Start\\BundleConfig.cs",
+              "ToolTip": "C:\\Users\\lukah\\Documents\\Mono\\Example.WebApi\\App_Start\\BundleConfig.cs",
+              "RelativeToolTip": "Example.WebApi\\App_Start\\BundleConfig.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-27T13:06:20.392Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "FilterConfig.cs",
+              "DocumentMoniker": "C:\\Users\\lukah\\Documents\\Mono\\Example.WebApi\\App_Start\\FilterConfig.cs",
+              "RelativeDocumentMoniker": "Example.WebApi\\App_Start\\FilterConfig.cs",
+              "ToolTip": "C:\\Users\\lukah\\Documents\\Mono\\Example.WebApi\\App_Start\\FilterConfig.cs",
+              "RelativeToolTip": "Example.WebApi\\App_Start\\FilterConfig.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-27T13:06:29.741Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "_ViewStart.cshtml",
+              "DocumentMoniker": "C:\\Users\\lukah\\Documents\\Mono\\Example.WebApi\\Views\\_ViewStart.cshtml",
+              "RelativeDocumentMoniker": "Example.WebApi\\Views\\_ViewStart.cshtml",
+              "ToolTip": "C:\\Users\\lukah\\Documents\\Mono\\Example.WebApi\\Views\\_ViewStart.cshtml",
+              "RelativeToolTip": "Example.WebApi\\Views\\_ViewStart.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-02-27T13:35:06.585Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "packages.config",
+              "DocumentMoniker": "C:\\Users\\lukah\\Documents\\Mono\\Example.WebApi\\packages.config",
+              "RelativeDocumentMoniker": "Example.WebApi\\packages.config",
+              "ToolTip": "C:\\Users\\lukah\\Documents\\Mono\\Example.WebApi\\packages.config",
+              "RelativeToolTip": "Example.WebApi\\packages.config",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2024-02-27T13:36:24.408Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "RouteConfig.cs",
+              "DocumentMoniker": "C:\\Users\\lukah\\Documents\\Mono\\Example.WebApi\\App_Start\\RouteConfig.cs",
+              "RelativeDocumentMoniker": "Example.WebApi\\App_Start\\RouteConfig.cs",
+              "ToolTip": "C:\\Users\\lukah\\Documents\\Mono\\Example.WebApi\\App_Start\\RouteConfig.cs",
+              "RelativeToolTip": "Example.WebApi\\App_Start\\RouteConfig.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-27T13:06:31.167Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Web.config",
+              "DocumentMoniker": "C:\\Users\\lukah\\Documents\\Mono\\Example.WebApi\\Web.config",
+              "RelativeDocumentMoniker": "Example.WebApi\\Web.config",
+              "ToolTip": "C:\\Users\\lukah\\Documents\\Mono\\Example.WebApi\\Web.config",
+              "RelativeToolTip": "Example.WebApi\\Web.config",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2024-02-27T12:36:08.603Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

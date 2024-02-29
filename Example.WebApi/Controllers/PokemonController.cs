@@ -22,9 +22,9 @@ namespace Example.WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<HttpResponseMessage> GetAllPokemons([FromUri]string nameQuery="", string typeQuery = "", string secondTypeQuery = "", int trainerId = 0 , int pageNum = 1, int pageSize = 10, string sortOrder = "ASC", string sortBy = "TrainerId")
+        public async Task<HttpResponseMessage> GetAllPokemons([FromUri]string nameQuery="", string typeQuery = "", string secondTypeQuery = "", int trainerId = 0 , int pageNum = 1, int pageSize = 10, string sortOrder = "ASC", string sortBy = "Id")
         {
-            Task<List<PokemonRead>> pokemons = pokemonService.GetAllPokemonsAsync(nameQuery, typeQuery, secondTypeQuery, trainerId = 0, pageNum = 1, pageSize = 10, sortOrder = "ASC",  sortBy = "TrainerId");
+            Task<List<PokemonRead>> pokemons = pokemonService.GetAllPokemonsAsync(nameQuery, typeQuery, secondTypeQuery, trainerId = 0, pageNum = 1, pageSize = 10, sortOrder = "ASC",  sortBy = "Id");
             await pokemons;
             if (pokemons == null)
             {
