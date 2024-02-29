@@ -18,13 +18,12 @@ namespace Example.Service
             this.pokemonRepository = pokemonRepository;
         }
 
-        public async Task<List<PokemonRead>> GetAllPokemonsAsync(string nameQuery = "", string typeQuery ="", string secondTypeQuery = "", int trainerId = 0, int pageNum = 1, int pageSize = 10, string sortOrder = "ASC", string sortBy = "TrainerId")
+        public async Task<List<PokemonRead>> GetAllPokemonsAsync(string nameQuery = "", string typeQuery ="", string secondTypeQuery = "", int pageNum = 1, int pageSize = 10, string sortOrder = "ASC", string sortBy = "TrainerId")
         {
             PokemonFilter filter = new PokemonFilter();
             filter.NameQuery = nameQuery;
             filter.TypeQuery = typeQuery;
             filter.SecondTypeQuery = secondTypeQuery;
-            filter.TrainerId = trainerId;
 
             Paging paging = new Paging();
             paging.PageNum = pageNum;

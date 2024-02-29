@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Autofac.Integration.WebApi;
 using Example.WebApi.App_Start;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,8 @@ namespace Example.WebApi
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             GlobalConfiguration.Configure(DIConfig.Register);
+            var json = GlobalConfiguration.Configuration.Formatters.JsonFormatter;
+            json.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
         }
     }
 }
